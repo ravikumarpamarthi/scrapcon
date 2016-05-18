@@ -1,0 +1,47 @@
+<ion-header-bar class="bar-balanced bar-balanced-new" align-title="center" title="Share and Earn">
+    <div class="buttons">
+        <button class="button ion-android-arrow-back button-clear" style="color:black;font-size:30px;" ng-click="closeShare()"></button>
+    </div>
+    <h1 class="title">Share and Earn</h1>
+</ion-header-bar>
+<!-- <ion-view hide-nav-bar="false" cache-view="false" hide-back-button="false" title="Share and Earn" > -->
+<ion-content class="share-main" has-bouncing="false">
+    <div class="row row-center m-t-30-p">
+        <div class="col text-center ">
+            <h2 class="t-c-w">{{refferalCode | uppercase}}</h2>
+            <p class="t-c-w">Share your referral code with family, friends, loved ones or the world!</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" ng-click="shareViaWhatsApp()">
+            <div class="whatsapp-c text-center"><img ngCache class="img-rel-t-10 img-rel-t-15" src="main/assets/svg/whatsapp-white.svg" width="50px" height="50px" /><span class="c-w-f-10">WHATSAPP</span></div>
+        </div>
+        <div class="col" ng-click="shareViaSMS()">
+            <div class="sms-c text-center"><img ngCache class="img-rel-t-10 img-rel-t-15" src="main/assets/svg/sms-white.svg" width="50px" height="50px" /><span class="c-w-f-10">SMS</span></div>
+        </div>
+        <div class="col"  ng-click="shareViaEmail()">
+            <div class="email-c text-center"><img ngCache class="img-rel-t-10 img-rel-t-15" src="main/assets/svg/email-white.svg" width="50px" height="50px" /><span class="c-w-f-10">EMAIL</span></div>
+        </div>
+        <div class="col" ng-click="shareViaTwitter()" >
+            <div class="email-c text-center" style="background-color:#55ACEE;">
+              <img ngCache class="img-rel-t-10 img-rel-t-15 img-extra-top" src="main/assets/svg/twitter-media-white1.svg" width="35px" height="35px" />
+              <span class="c-w-f-10 span-extra-top" >TWITTER</span>
+            </div>
+        </div>
+        <div class="col" ng-click="shareViaFacebook()" >
+            <div class="email-c text-center" style="background-color:#3C5899;">
+              <img ngCache class="img-rel-t-10 img-rel-t-15 img-extra-top" src="main/assets/svg/facebook-media-white1.svg" width="35px" height="35px" />
+              <span class="c-w-f-10 span-extra-top" >FACEBOOK</span>
+            </div>
+        </div>
+        <!-- <div class="col" ng-click="more=true" ng-show="!more">
+            <div class="more-c text-center" >
+                <div class="img-rel-t-15 more-parent" >
+                    <span><i class="icon ion-record more-m-r-5" ></i></span><span><i class="icon ion-record more-m-r-5" ></i></span><span><i class="icon ion-record more-m-r-5" ></i></span>
+                </div>
+                <span class="c-w-f-10 more-span-text" >More</span>
+            </div>
+        </div> -->
+    </div>
+</ion-content>
+</ion-view>

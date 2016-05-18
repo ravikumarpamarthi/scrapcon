@@ -1,0 +1,92 @@
+<ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false" title="REGISTRATION">
+    <!-- <ion-view hide-nav-bar="false" title="OTP" hide-back-button="true" cache-view="false">
+ -->
+    <form name="otpForm" novalidate>
+        <ion-content padding="true" class="has-header has-tabs login_bg" has-bouncing="false">
+            <div class="button-bar button-pill m-b-10" id="button-group">
+                <a class="button " disabled>DETAILS</a>
+                <a class="button right-arrow-white button-positive disabled-class " disabled>OTP</a>
+                <a class="button left-arrow-blue" disabled>PASSCODE</a>
+                <a class="button " disabled>LOCATION</a>
+            </div>
+            <div class="well padding text-center color-gray-new extra-margin">
+                <div>We have sent you an OTP as a text message, it should arrive shortly. Please use that code here to proceed. If you don't receive it in due course, call us - we will help.</div>
+            </div>
+            <div class="row row-center padding-horizontal">
+                <div class="col col-center paddingZero">
+                    <div class="errorDiv">
+                        {{errMessage}}
+                    </div>
+                    <br/>
+                    <ion-list>
+                        <label ng-if="!authorization.otpkey" class="item item-input icon-right removeBorders" ng-click="openOTPKeyPad()" style="margin-bottom:1px;">
+                            <!--  <span class="input-label">OTP</span> -->
+                            <i class="icon ion-ios-checkmark-outline placeholder-icon" style="color:#B9D542;"></i>
+                            <!-- <input ng-if="!authorization.otpkey" type="tel" placeholder="Enter OTP" name="otpb" ng-model="data.otp" required maxlength="6"> -->
+                            <span class="gray">Enter OTP</span>
+                        </label>
+                        <label ng-if="authorization.otpkey" class="item item-input icon-right removeBorders">
+                            <span class="input-label">OTP</span>
+                            <div>
+                                {{data.otp}}
+                                <i ng-if="authorization.otpkey" style="position:absolute;right:5px;color:green;" class="newSiteHeaderColor fa fa-check-circle-o"></i>
+                            </div>
+                        </label>
+                        <div ng-if="authorization.otpkey">
+                            <label class="item item-input removeBorders" ng-class="{ 'has-errors' : otpForm.password.$invalid && otpForm.$submitted, 'no-errors' : otpForm.password.$valid  && otpForm.$submitted}" ng-click="openPasswordKeyPad();" style="margin-bottom:1px;">
+                                <i class="newSiteHeaderColor ion-ios-unlocked-outline placeholder-icon fontSizeDouble iMarginPadding"></i>
+                                <div>
+                                    <i class="icon ion-ios-circle-filled mr5" ng-repeat="p in password track by $index"></i>
+                                    <span ng-if="password.length==0" class="gray">Enter Passcode</span>
+                                </div>
+                                <!-- <input type="password" name="password" ng-model="authorization.password" required placeholder="Enter New Password"> -->
+                            </label>
+                            <!-- <div class="error-container last-error-container" ng-show="otpForm.password.$error && otpForm.$submitted" ng-messages="otpForm.password.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div> -->
+                            <label class="item item-input removeBorders" ng-class="{ 'has-errors' : otpForm.confirmPassword.$invalid && otpForm.$submitted, 'no-errors' : otpForm.confirmPassword.$valid  && otpForm.$submitted}" ng-click="openRePasswordKeyPad();">
+                                <i class="newSiteHeaderColor ion-ios-unlocked-outline  placeholder-icon fontSizeDouble iMarginPadding"></i>
+                                <div>
+                                    <i class="icon ion-ios-circle-filled mr5" ng-repeat="p in repassword track by $index"></i>
+                                    <span ng-if="repassword.length==0" class="gray">Confirm new passcode</span>
+                                </div>
+                                <!-- <input type="password" name="confirmPassword" ng-model="authorization.confirmPassword" placeholder="Confirm new password" compare-to="authorization.password"> -->
+                            </label>
+                            <!-- <div class="error-container last-error-container" ng-show="otpForm.confirmPassword.$error" ng-messages="otpForm.confirmPassword.$error">
+                                <div ng-messages-include="error-list.html"></div> -->
+                        </div>
+                </div>
+                </ion-list>
+            </div>
+            </div>
+            <div ng-if="registration && authorization.otpkey" style="margin-bottom:50px;">
+                <h5>Select Category</h5>
+                <div class="row padding-horizontal" ng-repeat="item in catList">
+                    <div class="col col-20 borderCat padding-horizontal">
+                        <!-- <i ng-class="item.icon" class="fa pull-right double-Icon"></i> -->
+                        <img ngCache ng-src="{{$root.getImageFileById}}/{{item.icon}}.svg" class="fa pull-right double-Icon" width="35px" height="30px" />
+                    </div>
+                    <div class="col col-67 borderCat">
+                        <span class="ng-binding">   {{item.name}}</span>
+                    </div>
+                    <div class="col col-20 checkbox-balanced borderCat">
+                        <label class="checkbox-balanced item item-checkbox borderCate">
+                            <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+                                <input type="checkbox" data-checklist-model="userCategories" data-checklist-value="item.consumerCategoryId">
+                                <i class="checkbox-icon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+        <div class="tabs dashboardTabsStyle">
+            <button ng-click="verify()" type="submit" class="button button-stable button-clear button-block" ui-sref="main.registration-new" style="border-right:1px solid #E9F2F9;font-size:16px;color:white;opacity:1;margin-top: 0px;">
+                BACK
+            </button>
+            <button ng-click="submitOtpForm(otpForm)" ui-sref="main.passcode-new" class="button button-stable button-clear button-block"  style="font-size:16px;color:white;opacity:1;margin-top: 0px;">
+                NEXT
+            </button>
+        </div>
+    </form>
+</ion-view>

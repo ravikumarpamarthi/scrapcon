@@ -1,0 +1,85 @@
+
+{
+    "status": "SUCCESS",
+    "data": [{
+        "categoryId": "1",
+        "name": "News Papers",
+        "imageURL": "images/newspaper.jpg",
+        "code": null,
+        "price": "10",
+        "uom": "kg",
+        "description": ""
+    },
+    {
+        "categoryId": "2",
+        "name": "Plastic",
+        "imageURL": "images/plastic_scrap.jpg",
+        "code": null,
+        "price": "20",
+        "uom": "kg",
+        "description": ""
+    },
+    {
+        "categoryId": "3",
+        "name": "Bottles",
+        "imageURL": "images/bottles.jpg",
+        "code": null,
+        "price": "20",
+        "uom": "kg",
+        "description": ""
+    },
+    {
+        "categoryId": "4",
+        "name": "Aluminium",
+        "imageURL": "images/aluminum.jpg",
+        "code": null,
+        "price": "20",
+        "uom": "kg",
+        "description": ""
+    },
+    {
+        "categoryId": "5",
+        "name": "Iron",
+        "imageURL": "images/iron.jpg",
+        "code": null,
+        "price": "20",
+        "uom": "kg",
+        "description": ""
+    },
+    {
+        "categoryId": "6",
+        "name": "E-Waste",
+        "imageURL": "images/electronics-mixed.jpg",
+        "code": null,
+        "price": "20",
+        "uom": "kg",
+        "description": ""
+    },
+    {
+        "categoryId": "7",
+        "name": "Glass",
+        "imageURL": "images/altglas_flaschen.gif",
+        "code": null,
+        "price": "20",
+        "uom": "kg",
+        "description": ""
+    },
+    {
+        "categoryId": "8",
+        "name": "Card Board",
+        "imageURL": "images/cardboard.jpg",
+        "code": null,
+        "price": "20",
+        "uom": "kg",
+        "description": ""
+    },
+    {
+        "categoryId": "9",
+        "name": "Books",
+        "imageURL": "images/books.jpg",
+        "code": null,
+        "price": "20",
+        "uom": "kg",
+        "description": ""
+    }]
+}

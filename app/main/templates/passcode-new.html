@@ -1,0 +1,59 @@
+<ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false" title="REGISTRATION">
+    <!-- <ion-view hide-nav-bar="false" title="OTP" hide-back-button="true" cache-view="false">
+ -->
+    <form name="otpForm" novalidate>
+        <ion-content padding="true" class="has-header has-tabs login_bg" has-bouncing="false">
+            <div class="button-bar button-pill m-b-10" id="button-group">
+                <a class="button " disabled>DETAILS</a>
+                <a class="button " disabled>OTP</a>
+                <a class="button right-arrow-white button-positive disabled-class " disabled>PASSCODE</a>
+                <a class="button left-arrow-blue" disabled>LOCATION</a>
+            </div>
+            <div class="well padding text-center color-gray-new extra-margin">
+                <div>Almost there...</div>
+                <div>Set up a memorable numeric passcode that is 6 digit long.</div>
+            </div>
+            <div class="row row-center padding-horizontal">
+                <div class="col col-center paddingZero">
+                    <div class="errorDiv">
+                        {{errMessage}}
+                    </div>
+                    <ion-list>
+                        <div ng-if="!authorization.otpkey">
+                            <label class="item item-input removeBorders" ng-class="{ 'has-errors' : otpForm.password.$invalid && otpForm.$submitted, 'no-errors' : otpForm.password.$valid  && otpForm.$submitted}" ng-click="openPasswordKeyPad();" style="margin-bottom:1px;">
+                                <i class="newSiteHeaderColor ion-ios-unlocked-outline placeholder-icon fontSizeDouble iMarginPadding"></i>
+                                <div>
+                                    <i class="icon ion-ios-circle-filled mr5" ng-repeat="p in password track by $index"></i>
+                                    <span ng-if="password.length==0" class="gray">Enter Passcode</span>
+                                </div>
+                                <!-- <input type="password" name="password" ng-model="authorization.password" required placeholder="Enter New Password"> -->
+                            </label>
+                            <!-- <div class="error-container last-error-container" ng-show="otpForm.password.$error && otpForm.$submitted" ng-messages="otpForm.password.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div> -->
+                            <label class="item item-input removeBorders" ng-class="{ 'has-errors' : otpForm.confirmPassword.$invalid && otpForm.$submitted, 'no-errors' : otpForm.confirmPassword.$valid  && otpForm.$submitted}" ng-click="openRePasswordKeyPad();">
+                                <i class="newSiteHeaderColor ion-ios-unlocked-outline  placeholder-icon fontSizeDouble iMarginPadding"></i>
+                                <div>
+                                    <i class="icon ion-ios-circle-filled mr5" ng-repeat="p in repassword track by $index"></i>
+                                    <span ng-if="repassword.length==0" class="gray">Confirm new passcode</span>
+                                </div>
+                                <!-- <input type="password" name="confirmPassword" ng-model="authorization.confirmPassword" placeholder="Confirm new password" compare-to="authorization.password"> -->
+                            </label>
+                            <!-- <div class="error-container last-error-container" ng-show="otpForm.confirmPassword.$error" ng-messages="otpForm.confirmPassword.$error">
+                                <div ng-messages-include="error-list.html"></div> -->
+                        </div>
+                </div>
+                </ion-list>
+            </div>
+            </div>
+        </ion-content>
+        <div class="tabs dashboardTabsStyle">
+            <button ng-click="verify()" ui-sref="main.otp-new" class="button button-stable button-clear button-block" type="submit" style="border-right:1px solid #E9F2F9;font-size:16px;color:white;opacity:1;margin-top: 0px;">
+                BACK
+            </button>
+            <button ng-click="submitOtpForm(otpForm)" ui-sref="main.category-new"  class="button button-stable button-clear button-block" style="font-size:16px;color:white;opacity:1;margin-top: 0px;">
+                NEXT
+            </button>
+        </div>
+    </form>
+</ion-view>

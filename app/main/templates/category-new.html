@@ -1,0 +1,44 @@
+<ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false" title="REGISTRATION">
+    <!-- <ion-view hide-nav-bar="false" title="OTP" hide-back-button="true" cache-view="false">
+ -->
+    <form name="otpForm" novalidate>
+        <ion-content padding="true" class="has-header has-tabs login_bg" has-bouncing="false">
+            <div class="button-bar button-pill m-b-10" id="button-group">
+                <a class="button " disabled>DETAILS</a>
+                <a class="button " disabled>OTP</a>
+                <a class="button" disabled>PASSCODE</a>
+                <a class="button right-arrow-white button-positive disabled-class" disabled>LOCATION</a>
+            </div>
+            <div class="well padding text-center color-gray-new extra-margin">
+                <div class="padding-horizontal">Finally, choose your category, add address and allow us to serve you better.</div>
+            </div>
+            <div style="margin-bottom:50px;">
+                <div class="row padding-horizontal" ng-repeat="item in catList">
+                    <div class="col col-20 borderCat padding-horizontal">
+                        <!-- <i ng-class="item.icon" class="fa pull-right double-Icon"></i> -->
+                        <img ngCache ng-src="{{$root.getImageFileById}}/{{item.icon}}.svg" class="fa pull-right double-Icon" width="35px" height="30px" />
+                    </div>
+                    <div class="col col-67 borderCat">
+                        <span class="ng-binding">   {{item.name}}</span>
+                    </div>
+                    <div class="col col-20 checkbox-balanced borderCat">
+                        <label class="checkbox-balanced item item-checkbox borderCate">
+                            <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+                                <input type="checkbox" data-checklist-model="userCategories" data-checklist-value="item.consumerCategoryId">
+                                <i class="checkbox-icon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </ion-content>
+        <div class="tabs dashboardTabsStyle">
+            <button ng-if="!authorization.otpkey" ng-click="verify()" type="submit" class="button button-stable button-clear button-block" type="submit" style="font-size:16px;color:white;opacity:1;margin-top: 0px;">
+                FINISH
+            </button>
+            <button ng-if="authorization.otpkey" ng-click="submitOtpForm(otpForm)" type="submit" class="button button-stable button-clear button-block" type="submit" style="font-size:16px;color:white;opacity:1;margin-top: 0px;">
+                Submit
+            </button>
+        </div>
+    </form>
+</ion-view>

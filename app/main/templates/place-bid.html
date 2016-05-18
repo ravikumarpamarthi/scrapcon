@@ -1,0 +1,73 @@
+<ion-view hide-nav-bar="false"  hide-back-button="true" cache-view="false">
+ <!-- <ion-view hide-nav-bar="false" title="Bids" hide-back-button="true" cache-view="false">
+  -->   <ion-content has-bouncing="true" class="has-header" style="background-color:#F2F2F2;margin-bottom:30px;">
+        <div>
+            <div class="list padding marginPaddingMix" >
+                <div class="row">
+                    <div class="col col-90">
+                        <label ng-show="!newlocation" class="item item-input item-select">
+                            <i class="icon ion-android-person placeholder-icon"></i>
+                            <select ng-model="selectedItem" ng-options="location as location.formattedAddress for location in locations" ng-change="setMap(selectedItem)" style="direction:ltr;padding-left:2px;">
+                                <option value="">Select Location</option>
+                            </select>
+                        </label>
+                        <label ng-show="newlocation" class="item item-input googlePlaceLabel">
+                            <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" />
+                        </label>
+                    </div>
+                    <div class="col col-10" >
+                       <a class="balanced">
+                            <i class="icon" style="font-size:30px;" ng-class="{true: 'ion-plus-circled', false: 'ion-minus-circled'}[!newlocation]" ng-click="newlocation = !newlocation;managePlaceObject(newlocation)"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+             <div ng-if="placeError" class="errorDiv">Select Location</div>
+            <!-- <ion-list ng-show="newlocationDrop">
+                <div class="padding">
+                    <label class="item item-input" style="padding:0px;padding-left:5px;">
+                        <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" />
+                    </label>
+                </div>
+                <div ng-if="placeError" class="errorDiv">Select Location</div>
+            </ion-list> -->
+            <div class="padding map-parent">
+                <ng-map zoom="14" center="{{center}}" style="height:250px;" zoom-control=false street-view-control=false map-type-control=false>
+                    <marker draggable="true" position="{{center}}" on-dragend="markerDragEnd(event)" icon="main/assets/images/consumer.svg"></marker>
+                </ng-map>
+                <div class="map-child-target" ng-click="setCurrentLocation()"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div>
+            </div>
+        </div>
+        <div class="list padding">
+            <div class="item row" ng-repeat="category in data.items" style="margin-bottom:10px;">
+                <div class="col col-25 item-thumbnail">
+                    <img ngCache ng-src="{{$root.getImageFileById}}/{{category.image}}.jpg" width="70" height="70" />
+                </div>
+                <div class="col col-25 col-center">
+                    <div style="margin-bottom:5px;">{{category.name}}</div>
+                    <div style="font-size:14px;">Rate/Kg: {{category.price}} Rs</div>
+                </div>
+                <div class="col col-50 col-center" style="text-align:right;">
+                    <div>Qty&nbsp;&nbsp;
+                        <span class="lt" on-tap="decreaseQty($index)"><i class="icon ion-ios-minus-outline balanced"></i></span>
+                        <input class="bidinp" id="bidqty{{$index}}" ng-model="data.items[$index].quantity" type="tel" />
+                        <span class="lt" on-tap="increaseQty($index)"><i class="icon ion-ios-plus-outline balanced"></i></span>
+                    </div>
+                    <div>Rate&nbsp;&nbsp;
+                        <span class="lt" on-tap="decreasePrice($index)"><i class="icon ion-ios-minus-outline balanced"></i></span>
+                        <input class="bidinp" ng-model="data.items[$index].bidPrice" type="tel" />
+                        <span class="lt" on-tap="increasePrice($index)"><i class="icon ion-ios-plus-outline balanced"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden padding">
+                <button class="button button-block button-balanced" ng-click="placeBid()">Bid</button>
+            </div>
+        </div>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle">
+        <button class="button button-stable button-clear tab-item item-text-wrap" ng-click="placeBid()" style="font-size:16px;color:white;opacity:1;">
+            Bid
+        </button>
+    </div>
+</ion-view>

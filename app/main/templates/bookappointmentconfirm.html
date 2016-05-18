@@ -1,0 +1,25 @@
+<ion-view  cache-view="false" hide-back-button="true">
+<!-- <ion-view title="Book Appointment" cache-view="false" hide-back-button="true">
+ --><ion-content has-bouncing="false" padding="true" class="has-header">
+			<div class="list">
+					<span>Confirmation ID:{{sellDetails.sellObjId}}</span><br/>
+                    <span>Pickup Location:{{sellDetails.address.formattedAddress}} </span><br>
+            </div>
+                     
+                        <ng-map zoom="11" center="{{center}}" >
+                          <marker ng-repeat="p in positions"
+                            position="{{p.pos}}"
+                            data="{{data[$index]}}"
+                            on-click="showData(this)"
+                            title="pos: {{p.pos}}" draggable="true"></marker>
+                        </ng-map>
+
+                    
+                    <span>Pickup Date:{{sellDetails.preferredDate}} </span><br>
+                    <span>Pickup Time: {{sellDetails.preferredSlot}}</span><br>
+                    <span>Agent Name: {{sellDetails.agentName}}</span><br>
+                    <span>Agent Mobile Number: {{sellDetails.agentMobileNo}}</span>
+
+                    
+</ion-content>
+</ion-view>

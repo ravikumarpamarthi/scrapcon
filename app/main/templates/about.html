@@ -1,0 +1,48 @@
+<!-- <ion-view hide-nav-bar="false" cache-view="false" view-title="About Us" hide-back-button="true"> -->
+<ion-view hide-nav-bar="false" cache-view="false" hide-back-button="true" title="About ScrapQ">
+    <ion-content scroll="false" has-bouncing="false" padding="true" class="has-header">
+        <div class="row hidden paddingZero">
+            <div class="col text-center">
+                <img ngCache src="main/assets/images/logo-menu.png" />
+            </div>
+        </div>
+        <div class="padding text-center rd-bor-bot">Version 0.1.0 (beta)</div>
+        <div class="padding"></div>
+        <ion-scroll direction="y" class="about-content-scroll">
+            <div ng-bind-html="about"></div>
+        </ion-scroll>
+        <!-- <div class="row padding about-bottom">
+            <div class="col padding text-center">
+                <img src="main/assets/svg/facebook-ac1.svg" width="45px" height="40px" />
+            </div>
+            <div class="col padding text-center">
+                <img src="main/assets/svg/google-ac1.svg" width="45px" height="40px" />
+            </div>
+            <div class="col padding text-center">
+                <img src="main/assets/svg/twitter-ac1.svg" width="45px" height="40px" />
+            </div>
+        </div> -->
+    </ion-content>
+    <ion-footer-bar align-title="left" class="bar-default" style="height:50px;">
+        <div class="row row-center" style="padding-top:10px;">
+            <div class="col col-center text-center gray">
+                Follow Us On:
+            </div>
+            <div class="col col-center text-center">
+                <img ngCache src="main/assets/svg/facebook-ac1.svg" width="45px" height="40px" />
+            </div>
+            <div class="col col-center text-center">
+                <img ngCache src="main/assets/svg/google-ac1.svg" width="45px" height="40px" />
+            </div>
+            <div class="col col-center text-center">
+                <img ngCache src="main/assets/svg/twitter-ac1.svg" width="45px" height="40px" />
+            </div>
+        </div>
+    </ion-footer-bar>
+    <!-- <div class="tabs dashboardTabsStyle" style="border:none;background-color:transparent;">
+            <button class="button button-stable button-block  button-clear" type="submit" style="font-size:16px;color:white;opacity:1;margin-top: 0px;"><img src="main/assets/svg/facebook-ac1.svg" width="45px" height="40px" />               
+            </button>
+             <button class="button button-stable button-block  button-clear" type="submit" style="font-size:16px;color:white;opacity:1;margin-top: 0px;"><img src="main/assets/svg/twitter-ac1.svg" width="45px" height="40px" />
+             </button>
+        </div> -->
+</ion-view>

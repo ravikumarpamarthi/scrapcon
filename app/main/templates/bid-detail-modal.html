@@ -1,0 +1,68 @@
+<div class="modal">
+    <ion-header-bar class="bar-balanced">
+        <h1 class="title">Bid Details</h1>
+        <div class="buttons">
+            <button class="button ion-close-circled button-clear" ng-click="bidCloseModal()"></button>
+        </div>
+    </ion-header-bar>
+  <ion-content has-bouncing="true">
+        <div class="row">
+            <div class="col col-33">Confirmation ID</div>
+            <div class="col col-67" >: {{bidDetails.confirmationId}}</div>
+        </div>
+        <div class="row">
+            <div class="col col-33">Status</div>
+            <div class="col col-67" >: {{bidDetails.status}}</div>
+        </div>
+        <h4 class="headingStyle" >Consumer Details</h4>
+        <div class="row" >
+            <div class="col col-33">Name</div>
+            <div class="col col-67">: {{bidDetails.consumerName}}
+            </div>
+        </div>
+        <div class="row" >
+            <div class="col col-33">Mobile</div>
+            <div class="col col-67">: {{bidDetails.consumerMobileNo}}</div>
+        </div>
+        <div class="row" >
+            <div class="col col-33">Address</div>
+            <div class="col col-67">: {{bidDetails.consumerAddress.formattedAddress}}</div>
+        </div>
+        <h4 class="headingStyle" >Item Details</h4>
+        <div class="paddingBottomZero" >
+            <div class="list padding">
+                <div class="item row paddingZero custom-margin10" ng-repeat="category in bidDetails.items">
+                    <div class="col col-50 col-center" style="font-size:13px;">
+                        <div style="margin-bottom:5px;">{{category.categoryName}}</div>
+                         <div class="spin">Qty&nbsp;-&nbsp
+                            {{category.quantity}}
+                        </div>
+                    </div>
+                    <div class="col col-50 col-center" style="text-align:right;font-size:13px;">
+                       
+                        <div class="spin">
+                        <b>{{category.status}}</b>
+                        </div> 
+                        <div class="spin">
+                        &nbsp;Bid Price&nbsp;-&nbsp;
+                        <b >{{category.bidPrice}}</b>/Kg
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4 class="headingStyle" >Activities:</h4>
+        <div style="padding-bottom:10px;">
+            <div ng-repeat="activity in bidDetails.activities">
+                <div class="row">
+                    <div class="col">On {{activity.performedOn}}</div>
+                    <div class="col">By {{activity.performedBy}}</div>
+                </div>
+                <div class="row">
+                    <div class="col">{{activity.description}}</div>
+                </div>
+                <hr/>
+            </div>
+        </div>
+    </ion-content>
+</div>

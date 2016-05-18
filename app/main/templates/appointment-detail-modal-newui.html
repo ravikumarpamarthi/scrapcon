@@ -1,0 +1,244 @@
+<div class="modal">
+    <ion-header-bar class="bar-balanced bar-balanced-new" align-title="center">
+        <h1 class="title">Request Details</h1>
+        <div class="buttons">
+            <button class="button ion-close-circled button-clear" style="color:black;" ng-click="appointmentCloseModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="" has-bouncing="false" style="margin-top:-10px;">
+        <div class="row paddingZero">
+            <div class="col col-50 site-bg-color-new">
+                <img ngCache class="img-rel-t-10" src="main/assets/svg/calender.svg" width="35px" height="30px" /><span class="f-s-14-c-w">{{sellDetails.preferredDate}}</span>
+            </div>
+            <div class="col col-50 rd-col-bg-gray">
+                <img ngCache class="img-rel-t-10" src="main/assets/svg/time1.svg" width="35px" height="30px" /><span class="f-s-14-c-w">{{sellDetails.preferredSlot}}</span>
+            </div>
+        </div>
+        <div class="row paddingZero row-center rd-bg-bs">
+            <div class="col col-50 paddingZero">
+                <div class="row row-center">
+                    <div class="col col-10 rd-pl-ml-mt">
+                        <img ngCache ng-src="main/assets/svg/{{(sellDetails.type == 'DROP')?'dropat':(sellDetails.subType == 'RECURRING')?'recurring':'pickup'}}.svg" width="45px" height="40px" />
+                    </div>
+                    <div class="col col-90 text-center">
+                        <div class="row rd-mb-pb-0">
+                            <!-- <div class="col col-100 rd-mb-pb-0"><span class="rd-fs-10">CONFIRMATION</span>
+                            </div> -->
+                        </div>
+                        <div class="row rd-pt-mt">
+                            <div class="col rd-pt-mt-0">
+                            <span class="detail-mod-span"> {{(sellDetails.type == 'DROP')?'DROP AT':(sellDetails.subType == 'RECURRING')?'RECURRING':sellDetails.type}}</span>
+                            <br/>
+                            <span class="rd-fs-10">CONFIRMATION</span>
+                            <br/>
+                            <span class="rd-fs-fw">{{sellDetails.confirmationId}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-50 paddingZero">
+                <div class="row row-center">
+                    <div class="col col-10 rd-pl-ml-mt">
+                        <img ngCache src="main/assets/svg/confirm1.svg" width="45px" height="40px" />
+                    </div>
+                    <div class="col col-90 text-center">
+                        <div class="row rd-mb-pb-0">
+                            <div class="col col-100 rd-mb-pb-0"><span class="rd-fs-10">STATUS</span>
+                            </div>
+                        </div>
+                        <div class="row rd-pt-mt">
+                            <div class="col col-100 rd-pt-mt-0"><span class="rd-fs-fw">{{sellDetails.status}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row padding rd-m-t-10">
+
+            <div class="col rd-bor-bot">
+                <span class="rd-fs-fw-head con-det">CONSUMER DETAILS</span>
+            </div>
+            <div class="col text-right rd-bor-bot">
+              {{(sellDetails.type == 'DROP')?'DROP AT':(sellDetails.subType == 'RECURRING')?'RECURRING':sellDetails.type}}
+             <!--    <button  class="pos-rel button button-small va-options-bg paddingZero va-options-disable" style="margin-right:5px;"><img class="pos-abs" src="main/assets/svg/edit-white-1.svg" width="35px" height="32px" ng-class="sellDetails.updationAllowed=='NO' ? 'va-options-disable':''" ng-click="(sellDetails.updationAllowed=='YES')?edit(sellDetails):''"/></button>
+                <button  class="pos-rel button button-small va-options-bg paddingZero">
+                <img class="pos-abs" src="main/assets/svg/remove-white-1.svg" width="35px" height="32px" ng-class="sellDetails.cancellationAllowed=='NO' ? 'va-options-disable':''" ng-click="(sellDetails.cancellationAllowed=='YES')?showConfirm(sellDetails):''"/>
+                </button> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-50 paddingZero">
+                <div class="row rd-p-t-0">
+                    <div class="col">
+                        <h5 class="rd-fs-10">NAME</h5>
+                        <span>{{sellDetails.consumerName}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h5 class="rd-fs-10">MOBILE</h5>
+                        <span>{{sellDetails.consumerMobileNo}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-50">
+                <h5 class="rd-fs-10">ADDRESS</h5>
+                <span>{{sellDetails.consumerAddress.formattedAddress}}</span>
+            </div>
+        </div>
+
+        <div class="row padding rd-m-t-10">
+            <div class="col rd-bor-bot"><span class="rd-fs-fw-head">AGENT DETAILS</span>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class="col col-50 paddingZero">
+                <div class="row rd-p-t-0">
+                    <div class="col">
+                        <h5 class="rd-fs-10">AGENT NAME</h5>
+                        <span>{{sellDetails.agentName}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <h5 class="rd-fs-10">MOBILE</h5>
+                        <span>{{sellDetails.agentMobileNo}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-50">
+                <h5 class="rd-fs-10">ADDRESS</h5>
+                <span>{{sellDetails.agentAddress.formattedAddress}}</span>
+            </div>
+        </div>
+
+        <div class="row padding rd-m-t-10" ng-if="sellDetails.items.length>0">
+            <div class="col text-left " ng-if="sellDetails.statusCode!='REQUEST_COMPLETED'">
+                <span class="rd-fs-fw-head">ITEM DETAILS</span>
+            </div>
+            <div class="col col-33 text-left " ng-if="sellDetails.statusCode=='REQUEST_COMPLETED'">
+                <span class="rd-fs-fw-head" >SALE DETAILS</span>
+            </div>
+            <div class="col col-67 text-right rd-fs-fw-head f-s-10" ng-if="sellDetails.statusCode=='REQUEST_COMPLETED'">
+                Closed on: {{sellDetails.completedDate}} {{sellDetails.completedTime}}
+            </div>
+        </div>
+        <div class="row padding" ng-if="sellDetails.statusCode=='REQUEST_COMPLETED'">
+            <div class="col col-50 tbl-head" >DESCRIPTION</div>
+            <div class="col text-right tbl-head" >QTY</div>
+            <div class="col text-right tbl-head" >UNIT</div>
+            <div class="col text-right tbl-head text-right" >AMOUNT</div>
+        </div>
+        <div class="row padding" ng-repeat="item in sellDetails.items" ng-if="sellDetails.statusCode=='REQUEST_COMPLETED'">
+            <div class="col col-50 tbl-cell" >
+                {{item.categoryName}}
+            </div>
+            <div class="col text-right tbl-cell" >
+                {{item.quantity}}
+            </div>
+            <div class="col text-right tbl-cell" >
+                {{item.pricePerUnit}}
+            </div>
+            <div class="col text-right tbl-cell text-right">
+                {{item.amount}}
+            </div>
+        </div>
+        <div class="row hidden padding" ng-if="sellDetails.statusCode!='REQUEST_COMPLETED'">
+            <div class="col tbl-cell" ></div>
+            <div class="col tbl-cell" ></div>
+            <div class="col tbl-cell text-right" >Total (Cash)</div>
+            <div class="col tbl-cell text-center" ><strong>{{total| number:2}}</strong></div>
+        </div>
+        <div class="row padding" ng-if="sellDetails.statusCode=='REQUEST_COMPLETED'">
+            <!-- <div class="col tbl-cell" ></div>
+            <div class="col tbl-cell" ></div> -->
+            <div class="col col-80 tbl-cell text-center" >Total (Cash)</div>
+            <div class="col col-20 tbl-cell text-right" ><strong >{{sellDetails.totalAmount| number:2}}</strong></div>
+        </div>
+        
+        <div  ng-if="sellDetails.statusCode!='REQUEST_COMPLETED'" ng-repeat="item in sellDetails.items" class="row " style="margin-top:-4px !important;">
+            <div class="col col-33 rd-first-box">
+                <div class="row row-center">
+                    <div class="col col-center">
+                        <div class="rd-circle" >
+                            <img ngCache width="45px" height="40px" ng-cache ng-src="{{$root.getImageFileById}}/{{item.image}}.jpg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col col-67 rd-second-boxr paddingZero"  ng-if="(sellDetails.status=='Request Completed')">
+                <div class="row paddingZero">
+                    <div class="col col-50 text-center">
+                        <h5 class="rd-fs-10">CATEGORY NAME</h5>
+                        <span>{{item.categoryName}}</span>
+                    </div>
+                    <div class="col col-50 text-center">
+                        <h5 class="rd-fs-10">PRICE PER UNIT</h5>
+                        <span>{{item.pricePerUnit}}</span>
+                    </div>
+                </div>
+                <div class="row paddingZero">
+                    <div class="col col-50 text-center">
+                        <h5 class="rd-fs-10">QUANTITY</h5>
+                        <span>{{item.quantity}}</span>
+                    </div>
+                    <div class="col col-50 text-center">
+                        <h5 class="rd-fs-10">AMOUNT</h5>
+                        <span>{{item.amount}}</span>
+                    </div>
+                </div>
+            </div>
+            
+          
+            <div class="col col-67 rd-second-box paddingZero" ng-if="(sellDetails.status!='Request Completed')">
+                <div class="row paddingZero">
+                    <div class="col col-50 text-center">
+                        <h5 class="rd-fs-10">CATEGORY NAME</h5>
+                        <span>{{item.categoryName}}</span>
+                    </div>
+                    <div class="col col-50 text-center">
+                        <h5 class="rd-fs-10">PRICE PER UNIT</h5>
+                        <span>{{item.pricePerUnit}}</span>
+                    </div>
+                </div>
+                <div class="row hidden paddingZero">
+                    <div class="col col-50 text-center">
+                        <h5 class="rd-fs-10">QUANTITY</h5>
+                        <span>{{item.quantity}}</span>
+                    </div>
+                    <div class="col col-50 text-center">
+                        <h5 class="rd-fs-10">AMOUNT</h5>
+                        <span>{{item.amount}}</span>
+                    </div>
+                </div>
+            </div>
+            
+        </div>        
+     
+
+        <div class="row padding rd-m-t-10">
+            <div class="col text-left">
+                <span class="rd-fs-fw-head">ACTIVITIES</span>
+            </div>
+        </div>
+        <div class="row rd-bor-bot-item"  ng-repeat="activity in sellDetails.activities">
+            <div class="col text-center rd-first-box">
+                <div class="row paddingZero row-center">
+                    <div class="col col-center">
+                        <h5 class="rd-fs">ON {{activity.performedOn}} BY {{activity.performedBy}}</h5>
+                        <h5 >{{activity.description}}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+             
+            
+        </div> 
+        
+    </ion-content>
+</div>

@@ -1,0 +1,128 @@
+<div class="modal">
+    <ion-header-bar class="bar-balanced bar-balanced-new" align-title="center">
+        <h1 class="title">Request Details</h1>
+        <div class="buttons">
+            <button class="button ion-close-circled button-clear" style="color:black;" ng-click="appointmentCloseModal()"></button>
+        </div>
+    </ion-header-bar>
+    <ion-content class="" has-bouncing="false" style="margin-top:-10px;">
+        <h4 style="margin-bottom:0px;background-color:#F3F3F3;padding:5px;color:black;">Request Details</h4>
+        <div class="row padding" style="padding-top:0px;padding-bottom:0px;">
+            <span class="col siteColor appointmentDate">{{sell.requestedOn}}</span>
+        </div>
+        <div class="row padding" style="padding-bottom:0px;">
+            <div class="col col-50"><span>Confirmation Id<span class="flRight">:</span></span>
+            </div>
+            <div class="col paddingTop"><span>{{sellDetails.confirmationId}}</span>
+            </div>
+        </div>
+        <div class="row padding" style="padding-bottom:0px;">
+            <div class="col col-50"><span>Date<span class="flRight">:</span></span>
+            </div>
+            <div class="col paddingTop"><span>{{sellDetails.preferredDate}}</span>
+            </div>
+        </div>
+        <div class="row padding" style="padding-bottom:0px;">
+            <div class="col col-50"><span>Time<span class="flRight">:</span></span>
+            </div>
+            <div class="col paddingTop"><span>{{sellDetails.preferredSlot}}</span>
+            </div>
+        </div>
+        <div class="row padding" style="padding-bottom:0px;">
+            <div class="col col-50"><span>Sell Type<span class="flRight">:</span></span>
+            </div>
+            <div class="col paddingTop"><span>{{sellDetails.type}}</span>
+            </div>
+        </div>
+        <div class="row padding" ng-if="sellDetails.totalAmount>0" style="padding-bottom:0px;">
+            <div class="col col-50"><span>Total Amount<span class="flRight">:</span>
+            </div>
+            <div class="col col-50"><span>{{sellDetails.totalAmount}}</span>
+            </div>
+        </div>
+        <h4 style="margin-bottom:0px;background-color:#F3F3F3;padding:5px;color:black;">Consumer Details</h4>
+        <div class="row padding" style="padding-top:0px;padding-bottom:0px;">
+            <div class="col first-row-first-col">Name<span class="flRight">:</span></div>
+            <div class="col first-row-second-col">{{sellDetails.consumerName}}
+            </div>
+        </div>
+        <div class="row padding" style="padding-bottom:0px;">
+            <div class="col second-row-first-col">Mobile<span class="flRight">:</span></div>
+            <div class="col second-row-second-col">{{sellDetails.consumerMobileNo}}</div>
+        </div>
+        <div class="row padding" style="padding-bottom:0px;">
+            <div class="col second-row-first-col">Address<span class="flRight">:</span></div>
+            <div class="col second-row-second-col">{{sellDetails.consumerAddress.formattedAddress}}</div>
+        </div>
+        <div ng-if="sellDetails.agentName">
+            <h4 style="margin-bottom:0px;background-color:#F3F3F3;padding:5px;color:black;">Agent Details</h4>
+            <div class="row padding" style="padding-top:0px;padding-bottom:0px;">
+                <div class="col first-row-first-col">Name<span class="flRight">:</span></div>
+                <div class="col first-row-second-col">{{sellDetails.agentName}}</div>
+            </div>
+            <div class="row padding" style="padding-bottom:0px;">
+                <div class="col second-row-first-col">Mobile<span class="flRight">:</span></div>
+                <div class="col second-row-second-col">{{sellDetails.agentMobileNo}}</div>
+            </div>
+            <div class="row padding" style="padding-bottom:0px;">
+                <div class="col second-row-first-col">Address<span class="flRight">:</span></div>
+                <div class="col second-row-second-col">{{sellDetails.agentAddress.formattedAddress}}</div>
+            </div>
+        </div>
+        <div ng-if="sellDetails.items.length>0">
+            <h4 style="margin-bottom:0px;background-color:#F3F3F3;padding:5px;color:black;">Item Details</h4>
+            <div style="padding-bottom:0px;">
+                <div ng-repeat="item in sellDetails.items">
+                    <div class="row padding" style="padding-top:0px;padding-bottom:0px;margin-bottom:6px;">
+                        <div class="col second-row-first-col">Category Name<span class="flRight">:</span></div>
+                        <div class="col second-row-second-col">{{item.categoryName}}</div>
+                    </div>
+                    <div class="row padding" style="padding-top:0px;padding-bottom:0px;margin-bottom:6px;">
+                        <div class="col second-row-first-col">Price Per Unit<span class="flRight">:</span></div>
+                        <div class="col second-row-second-col">{{item.pricePerUnit}}</div>
+                    </div>
+                    <div class="row padding" style="padding-top:0px;padding-bottom:0px;margin-bottom:6px;">
+                        <div class="col second-row-first-col">Quantity<span class="flRight">:</span></div>
+                        <div class="col second-row-second-col">{{item.quantity}}</div>
+                    </div>
+                    <div class="row padding" style="padding-top:0px;padding-bottom:0px;margin-bottom:6px;" ng-if="item.amount>0">
+                        <div class="col second-row-first-col">Amount<span class="flRight">:</span></div>
+                        <div class="col second-row-second-col">{{item.amount}}</div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+        </div>
+        <h4 style="margin-bottom:0px;background-color:#F3F3F3;padding:5px;color:black;">Activities</h4>
+        <div style="padding-bottom:10px;">
+            <div>
+                
+                <div ng-repeat="activity in sellDetails.activities">
+                <div class="row">
+                    <div class="col">On {{activity.performedOn}}</div>
+                    <div class="col">By {{activity.performedBy}}</div>
+                </div>
+                <div class="row">
+                    <div class="col">{{activity.description}}</div>
+                </div>
+                    <hr/>
+                </div>
+
+                <!-- <div class="row padding" style="padding-top:0px;padding-bottom:0px;">
+                    <div class="col first-row-first-col">Performed On<span class="flRight">:</span></div>
+                    <div class="col first-row-second-col">{{activity.performedOn}}</div>
+                </div>
+                <div class="row padding" style="padding-top:0px;padding-bottom:0px;">
+                    <div class="col first-row-first-col">Performed By<span class="flRight">:</span></div>
+                    <div class="col first-row-second-col">{{activity.performedBy}}</div>
+                </div>
+                <div class="row padding" style="padding-top:0px;padding-bottom:0px;">
+                    <div class="col second-row-first-col">Description<span class="flRight">:</span></div>
+                    <div class="col second-row-second-col">{{activity.performedBy}}</div>
+                </div> -->
+             
+            </div>
+        </div>
+        <h4 style="margin-bottom:0px;background-color:#F3F3F3;padding:5px;color:black;"></h4>
+    </ion-content>
+</div>

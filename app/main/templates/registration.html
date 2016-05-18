@@ -1,0 +1,62 @@
+<ion-view hide-nav-bar="false" cache-view="false" hide-back-button="true" title="Registration">
+    <!-- <ion-view hide-nav-bar="false" view-title="Registration" cache-view="false" hide-back-button="true">
+ -->
+    <form name="authorizationForm" novalidate="" ng-submit="signUp(authorizationForm)">
+        <ion-content padding="true" class="has-header has-tabs login_bg" has-bouncing="false">
+            <div class="hidden item item-divider item-balanced textCenter">
+                Registration
+            </div>
+            <div class="well">
+                <div class="padding">Welcome to ScrapQ, your personal recycling agent.</div>
+                <div class="padding">Please create an account, it will take only a minute or two - then you can start recycling, save mother earth and earn some cash as well.</div>
+            </div>
+            <ion-list>
+                <div class="errorDiv">
+                    {{errMessage}}
+                </div>
+                {{regError}}
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : authorizationForm.username.$invalid && authorizationForm.$submitted, '' : authorizationForm.username.$valid}">
+                    <img ngCache src="main/assets/svg/user-agent1.svg" width="35px" height="30px" />
+                    <!-- <i class="newSiteHeaderColor fa fa-user placeholder-icon fontSizeDouble"></i> -->
+                    <input type="text" name="username" ng-model="authorization.name" ng-minlength="3" required placeholder="Enter Name">
+                </label>
+                <div class="error-container" ng-show="authorizationForm.username.$error &&authorizationForm.$submitted" ng-messages="authorizationForm.username.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+                <br>
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : authorizationForm.mobile.$invalid && authorizationForm.$submitted, '' : authorizationForm.mobile.$valid  && authorizationForm.$submitted}">
+                    <img ngCache src="main/assets/svg/mobile1.svg" width="35px" height="30px" />
+                    <!-- <i class="newSiteHeaderColor fa fa-mobile placeholder-icon fontSizeDouble iMarginPadding morePadding"></i> -->
+                    <input type="tel" name="mobile" ng-model="authorization.mobileNo" required placeholder="Enter Mobile No." ng-pattern="/^([0-9]{10})+$/" class="customInput">
+                </label>
+                <div class="error-container" ng-show="authorizationForm.mobile.$error &&authorizationForm.$submitted" ng-messages="authorizationForm.mobile.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+                <div class="error-container last-error-container" ng-show="authorizationForm.mobile.$error.pattern">
+                    <font style="color:red">Please Enter Valid Mobile</font>
+                </div>
+                <br>
+                <label class="item item-input removeBorders">
+                    <!-- <i class="newSiteHeaderColor fa fa-gift placeholder-icon fontSizeDouble"></i> -->
+                    <img ngCache src="main/assets/menusvgs/offer.svg" width="35px" height="30px" />
+                    <input type="text" name="referralCode" ng-model="authorization.referralCode" placeholder="Enter refferal Code if you have" class="customInput">
+                </label>
+                <div class="error-container last-error-container" ng-show="authorizationForm.referralCode.$error && authorizationForm.$submitted" ng-messages="authorizationForm.referralCode.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </ion-list>
+            <div class="marginTop hidden">
+                <span>
+              <button nav-transition="android" ui-sref="main.login" menu-close class="button button-outline button-small icon-left ion-person-add button-balanced" >Sign In</button>
+            </span>
+            </div>
+            <a ui-sref="main.login" style="margin-top:10px;float:right;color:gray;text-decoration:none;">Login</a>
+            <!-- <img src="main/assets/images/defaultsitebg.jpg" style="width:100%;margin-top:30%;" /> -->
+        </ion-content>
+        <div class="tabs dashboardTabsStyle">
+            <button class="button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+                Sign Up
+            </button>
+        </div>
+    </form>
+</ion-view>

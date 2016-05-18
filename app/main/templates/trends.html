@@ -1,0 +1,17 @@
+<ion-view hide-nav-bar="false" cache-view="false" hide-back-button="true" title="Price Trends">
+    <!-- <ion-view hide-nav-bar="false" cache-view="false" title="Trends" ng-controller="TrendsCtrl" hide-back-button="true">
+     --><ion-content padding="true" class="has-header" has-bouncing="false">
+        <!---->
+        <div class="card"  ng-repeat="trend in chartPriceTrends">
+            <div class="item item-divider">
+                <h2 class="siteColor" ng-bind="trend.name"></h2>
+            </div>
+            <div>
+                <canvas ng-if="$even" id="line" class="chart chart-line"  chart-legend="false" chart-data="trend.data" chart-labels="trend.labels" chart-series="['Series A']" >
+                </canvas>
+                <canvas ng-if="!$even" id="line" class="chart chart-bar"  chart-legend="false" chart-data="trend.data" chart-labels="trend.labels" chart-series="['Series A']" >
+                </canvas>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

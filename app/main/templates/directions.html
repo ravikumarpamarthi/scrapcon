@@ -1,0 +1,103 @@
+<div class="modal">
+    <ion-header-bar class="bar-balanced bar-balanced-new" align-title="center">
+        <h1 class="title">Directions</h1>
+        <div class="buttons">
+            <img ngCache ng-click="directionsCloseModal()" src="main/assets/svg/wrong.svg" width="45px" height="40px" />
+            
+        </div>
+    </ion-header-bar>
+    <ion-content padding="true" class="has-header" has-bouncing="false">
+        <div class="row text-center paddingZero" style="background-color:#858585;color:white;">
+            <div class="col col-50">
+                <div class="col col-100" style="border-right:1px solid #AAAAAA;">
+                    <span style="font-size:10px;">{{directions.sellDetails.type}} DATE</span>
+                </div>
+                <div class="row paddingZero" style="margin-top:-10px;border-right:1px solid #AAAAAA;">
+                    <div class="col col-10 paddingZero">
+                        <img ngCache src="main/assets/svg/user-agent1.svg" width="35px" height="30px" />
+                    </div>
+                    <div class="col col-90">
+                        <span style="font-size:18px;">{{directions.sellDetails.preferredDate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-50">
+                <div class="col col-100">
+                    <span style="font-size:10px;">{{directions.sellDetails.type}} TIME</span>
+                </div>
+                <div class="row paddingZero" style="margin-top:-10px;">
+                    <div class="col col-10 paddingZero">
+                        <img ngCache src="main/assets/svg/time1.svg" width="35px" height="30px" />
+                    </div>
+                    <div class="col col-90">
+                        <span style="font-size:18px;">{{directions.sellDetails.preferredSlot}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center" style="margin-top:0px;margin-bottom:0px;">
+            <div class="col col-33" style="border-right:1px solid #DDDDDD;padding-top:10px;padding-bottom:0px;">
+                <div style="margin-bottom:0px;">
+                <img ngCache src="main/assets/svg/confirmation-id1.svg" width="45px" height="40px" />
+                </div>
+                <span style="font-size:10px;">CONFIRMATION</span>
+                <span style="font-weight:bold;font-size:13px;">{{directions.sellDetails.confirmationId}}</span>
+            </div>
+            <div class="col col-33" style="border-right:1px solid #DDDDDD;padding-top:10px;padding-bottom:0px;">
+            <div style="margin-bottom:0px;">
+                <img ngCache src="main/assets/svg/user-agent1.svg" width="45px" height="40px" />
+                </div>
+                <span style="font-size:10px;">AGENT NAME</span>
+                <span style="font-weight:bold;font-size:13px;">{{directions.sellDetails.agentName}}</span>
+            </div>
+            <div class="col col-33" style="padding-top:10px;padding-bottom:0px;">
+            <div style="margin-bottom:0px;">
+                <img ngCache src="main/assets/svg/mobile1.svg" width="45px" height="40px" /> 
+                </div>
+                <span style="font-size:10px;">AGENT MOBILE</span>
+                <span style="font-weight:bold;font-size:13px;">{{directions.sellDetails.agentMobileNo}}</span>            </div>
+        </div>
+       
+
+<!-- <div class="row">
+    <div class="col col-50">Confirmation ID<span class="flRight">:</span></div>
+    <div class="col">{{directions.sellDetails.confirmationId}}</div>
+</div>
+<div class="row">
+    <div class="col col-50">Pickup Location<span class="flRight">:</span></div>
+    <div class="col">{{directions.sellDetails.consumerAddress.formattedAddress}}</div>
+</div> -->
+<ng-map zoom="14" map-type-control=false style="height:50%;" zoom-control=false street-view-control=false>
+    <marker position="{{directions.origin}}" icon="main/assets/images/consumer.svg"></marker>
+    <marker position="{{directions.destination}}" icon="main/assets/images/agent.svg"></marker>
+    <directions panel="directions-panel" travel-mode="DRIVING" suppress-markers=true origin="{{directions.origin}}" destination="{{directions.destination}}">
+    </directions>
+</ng-map>
+
+<div class="row">
+    <div class="col col-20 col-center">
+       <img ngCache src="main/assets/svg/user-agent1.svg" width="60px" height="60px" /> 
+    </div>
+    <div class="col col-80">
+        <div style="font-size:10px;">PICKUP LOCATION</div>
+        <div><span style="font-weight:bold;font-size:13px;">{{directions.sellDetails.consumerAddress.formattedAddress}}</span></div>
+    </div>
+</div>
+<!-- <div class="row">
+    <div class="col col-50">Pickup Date <span class="flRight">:</span></div>
+    <div class="col">{{directions.sellDetails.preferredDate}}</div>
+</div>
+<div class="row">
+    <div class="col col-50">Pickup Time <span class="flRight">:</span></div>
+    <div class="col">{{directions.sellDetails.preferredSlot}}</div>
+</div>
+<div class="row">
+    <div class="col col-50">Agent Name <span class="flRight">:</span></div>
+    <div class="col">{{directions.sellDetails.agentName}}</div>
+</div>
+<div class="row">
+    <div class="col col-50">Agent Mobile <span class="flRight">:</span></div>
+    <div class="col">{{directions.sellDetails.agentMobileNo}}</div>
+</div> -->
+</ion-content>
+</div>

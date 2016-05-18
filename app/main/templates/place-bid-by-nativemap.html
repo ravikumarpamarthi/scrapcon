@@ -1,0 +1,68 @@
+<ion-view hide-nav-bar="false"  hide-back-button="true" cache-view="false">
+ <!-- <ion-view hide-nav-bar="false" title="Bids" hide-back-button="true" cache-view="false">
+  -->   <!-- do you want padding? -->
+    <ion-content class="has-header" style="background-color:#F2F2F2;margin-bottom:30px;">
+        <div class="list padding marginBottom0 marginPaddingMix">
+            <div class="row">
+                <div class="col col-90">
+                    <label ng-show="!vm.newlocation" class="item item-input item-select padding5">
+                        <i class="icon ion-android-person placeholder-icon"></i>
+                        <select ng-model="vm.selectedItem" ng-options="location as location.formattedAddress for location in locations" ng-change="addressSelect();" style="direction:ltr;padding-left:2px;">
+                            <option value="">Select Location</option>
+                        </select>
+                    </label>
+                    <label ng-show="vm.newlocation" class="item item-input googlePlaceLabel">
+                        <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()"  ng-focus="disableTap()" ng-blur="mapSetClickable(true)"/>
+                         <a ng-if="vm.formattedAddress != ''" on-touch="onHold()">
+                            <i class="icon ion-ios-close placeholder-icon"></i>
+                        </a>
+                    </label>
+                </div>
+                <div class="col col-10">
+                    <a class="balanced">
+                        <i class="icon" style="font-size:30px;" ng-class="{true: 'ion-plus-circled', false: 'ion-minus-circled'}[!vm.newlocation]" ng-click="vm.newlocation = !vm.newlocation;managePlaceObject(vm.newlocation)">
+                  </i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div ng-if="placeError" class="errorDiv">Select Location</div>
+        <div class="padding map-parent">
+            <div id="map_canvas" style="width: 100%;height: 250px;">
+                <div class="map-child-target" ng-click="setCurrentLocation()"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div>
+            </div>
+        </div>
+
+         <div class="list padding">
+            <div class="item row" ng-repeat="category in data.items" style="margin-bottom:10px;">
+                <div class="col col-25 item-thumbnail">
+                    <img ngCache ng-src="{{$root.getImageFileById}}/{{category.image}}.jpg" width="70" height="70" />
+                </div>
+                <div class="col col-25 col-center">
+                    <div style="margin-bottom:5px;">{{category.name}} <i class="fa fa-info-circle" style="color:#cccccc;font-size:20px;"></i></div>
+                    <div style="font-size:14px;">Rate/Kg: {{category.price}} Rs</div>
+                </div>
+                <div class="col col-50 col-center" style="text-align:right;">
+                    <div>Qty&nbsp;&nbsp;
+                        <span class="lt" on-tap="decreaseQty($index)"><i class="icon ion-ios-minus-outline balanced"></i></span>
+                        <input class="bidinp" id="bidqty{{$index}}" ng-model="data.items[$index].quantity" type="tel" />
+                        <span class="lt" on-tap="increaseQty($index)"><i class="icon ion-ios-plus-outline balanced"></i></span>
+                    </div>
+                    <div>Rate&nbsp;&nbsp;
+                        <span class="lt" on-tap="decreasePrice($index)"><i class="icon ion-ios-minus-outline balanced"></i></span>
+                        <input class="bidinp" ng-model="data.items[$index].bidPrice" type="tel" />
+                        <span class="lt" on-tap="increasePrice($index)"><i class="icon ion-ios-plus-outline balanced"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden padding">
+                <button class="button button-block button-balanced" ng-click="placeBid()">Bid</button>
+            </div>
+        </div>
+    </ion-content>
+     <div class="tabs dashboardTabsStyle">
+        <button class="button button-stable button-clear tab-item item-text-wrap" ng-click="placeBid()" style="font-size:16px;color:white;opacity:1;">
+            Bid
+        </button>
+    </div>
+</ion-view>

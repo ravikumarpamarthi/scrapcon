@@ -1,0 +1,30 @@
+<ion-view  hide-nav-bar="false" cache-view="false" hide-back-button="true" title="Offers">
+   <!-- <ion-view view-title="Offers" hide-nav-bar="false" cache-view="false" hide-back-button="true">
+    --> <ion-content class="padding" has-bouncing="false">
+        <div class="list card" ng-if="offersList.length==0">
+            <div class="item text-center">
+                <p><div class="balanced">No offers available</div></p>
+            </div>
+        </div>
+        <div class="list card " ng-repeat="offer in offersList">
+            <div class="item paddingZero paddingLeft5">
+                <div class="row paddingZero fontSize90Percent">
+                    <div class="col col-50">Valid: <span class="
+                    fontWeightBold">{{offer.validFrom}} /</span></div>
+                    <div class="col col-50"><span class="
+                    fontWeightBold">{{offer.validTill}}</span></div>
+                </div>
+            </div>
+            <div class="item item-body padding">
+                <h2 ng-bind-html="offer.text" class="offersCodeName"></h2>
+                <div ng-if="offer.image">
+                    <img ngCache class="full-image" ng-src="{{$root.getImageFileById}}/{{offer.image}}.jpg">
+                </div>
+                <h2 class="marginTopBottomZero">Terms & Conditions:</h2>
+                <p class="offersTerms">
+                    {{offer.termsAndConditions}}
+                </p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

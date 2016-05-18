@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <!-- ionic meta tags -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!-- custom meta tags -->
+    <!--  <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' data: 'unsafe-inline' 'unsafe-eval' *; img-src 'self' data: 'unsafe-inline' 'unsafe-eval' *; style-src  'self' 'unsafe-inline' *"> -->
+    <!--
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' data:; default-src 'self' http://scrapq.digitelenetworks.com/ https://maps.googleapis.com/ https://maps.gstatic.com/ https://mts0.googleapis.com/ 'unsafe-inline' 'unsafe-eval'"> -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+    <link rel="stylesheet" href="bower_components/angular-chart.js/dist/angular-chart.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!--<link rel="stylesheet" href="main/styles/font-awesome/css/font-awesome.css" />-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.css" />
+    <!-- build:css main/styles/app.css -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="main/styles/main.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body ng-app="ScrapQ">
+    <!-- the nav bar will be updated as we navigate between views -->
+    <!-- <ion-nav-bar> can be removed when using sidemenu (contained in menu.html) -->
+    <ion-nav-bar class="bar-stable">
+        <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
+    <!-- the current view will be rendered in the <ion-nav-view> directive -->
+    <ion-nav-view cache-view="false"></ion-nav-view>
+    <walkthrough is-active="$root.walkThroughIsActive" walkthrough-type="transparency" on-walkthrough-hide="$root.hideWalkThrough($root.walkThroughImage)">
+        <img ng-if="$root.walkThroughIsActive" ng-src="main/assets/images/{{$root.walkThroughImage}}.png" style="height: 100vh; width: 100%;">
+    </walkthrough>
+    <script id="error-list.html" type="text/ng-template">
+        <div class="error" ng-message="required">
+            This field is required!
+        </div>
+        <div class="error" ng-message="minlength">
+            Minimum length of this field is 5 characters!
+        </div>
+        <div class="error" ng-message="maxlength">
+            Maximum length of this field is 250 characters!
+        </div>
+        <div class="error" ng-message="compareTo">Both passcodes aren't matching, please check again</div>
+    </script>
+    <script src="http://scrapq.digitelenetworks.com/locations.js"></script>
+    <!-- will be a 404 during development -->
+    <script src="cordova.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.22&libraries=places"></script>
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ionic-rating/ionic-rating.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+    <script src="bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js"></script>
+    <script src="bower_components/angular-translate/angular-translate.js"></script>
+    <script src="bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+    <script src="bower_components/localforage/dist/localforage.js"></script>
+    <script src="bower_components/angular-localForage/dist/angular-localForage.js"></script>
+    <script src="bower_components/angular-messages/angular-messages.js"></script>
+    <script src="bower_components/ngmap/build/scripts/ng-map.js"></script>
+    <script src="bower_components/ionic-datepicker/dist/ionic-datepicker.bundle.min.js"></script>
+    <script src="bower_components/ionic-timepicker/dist/ionic-timepicker.bundle.min.js"></script>
+    <script src="bower_components/angular-environment/dist/angular-environment.js"></script>
+    <script src="bower_components/angular-local-storage/dist/angular-local-storage.js"></script>
+    <script src="bower_components/angular-base64/angular-base64.js"></script>
+    <script src="bower_components/checklist-model/checklist-model.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/angular-momentjs/angular-momentjs.js"></script>
+    <script src="bower_components/Chart.js/Chart.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
+    <script src="bower_components/imgcache.js/js/imgcache.js"></script>
+    <script src="bower_components/ion-affix/ion-affix.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:js scripts/app.js -->
+    <!-- inject:js -->
+    <script src="tabSlideBox.js"></script>
+    <script src="main/main.js"></script>
+    <script src="main/services/sell-now-serv.js"></script>
+    <script src="main/services/scrap-categories-serv.js"></script>
+    <script src="main/services/profile.js"></script>
+    <script src="main/services/price-trends-serv.js"></script>
+    <script src="main/services/ng-walkthrough-tap-icons-serv.js"></script>
+    <script src="main/services/http-service.js"></script>
+    <script src="main/services/global.js"></script>
+    <script src="main/services/complaints-serv.js"></script>
+    <script src="main/services/commonSevices.js"></script>
+    <script src="main/services/bid-serv.js"></script>
+    <script src="main/services/authontication.js"></script>
+    <script src="main/filters/range-fil.js"></script>
+    <script src="main/filters/camel-case-fil.js"></script>
+    <script src="main/directives/walkthrough-dir.js"></script>
+    <script src="main/directives/standard-time-no-meridian-dir.js"></script>
+    <script src="main/directives/standard-time-meridian-dir.js"></script>
+    <script src="main/directives/ngImgCache.js"></script>
+    <script src="main/directives/ng-cache-dir.js"></script>
+    <script src="main/directives/googleplace-dir.js"></script>
+    <script src="main/directives/compare-to-dir.js"></script>
+    <script src="main/controllers/viewappnts-ctrl.js"></script>
+    <script src="main/controllers/trends-ctrl.js"></script>
+    <script src="main/controllers/sellnow-ctrl.js"></script>
+    <script src="main/controllers/sellnow-by-nativemap-ctrl.js"></script>
+    <script src="main/controllers/sellconfirm-ctrl.js"></script>
+    <script src="main/controllers/sell-confirmation-by-native-map-ctrl.js"></script>
+    <script src="main/controllers/reset-password-ctrl.js"></script>
+    <script src="main/controllers/registration-ctrl.js"></script>
+    <script src="main/controllers/refer-ctrl.js"></script>
+    <script src="main/controllers/place-bid-ctrl.js"></script>
+    <script src="main/controllers/place-bid-by-nativemap-ctrl.js"></script>
+    <script src="main/controllers/otp-ctrl.js"></script>
+    <script src="main/controllers/offers-ctrl.js"></script>
+    <script src="main/controllers/ngmap-ctrl.js"></script>
+    <script src="main/controllers/myaccount-ctrl.js"></script>
+    <script src="main/controllers/menu-ctrl.js"></script>
+    <script src="main/controllers/login-ctrl.js"></script>
+    <script src="main/controllers/forgotpassword-ctrl.js"></script>
+    <script src="main/controllers/fb-ctrl.js"></script>
+    <script src="main/controllers/faq-ctrl.js"></script>
+    <script src="main/controllers/edit-sellnow-ctrl.js"></script>
+    <script src="main/controllers/edit-sell-now-by-native-ctrl.js"></script>
+    <script src="main/controllers/edit-sell-ctrl.js"></script>
+    <script src="main/controllers/edit-drop-by-native-ctrl.js"></script>
+    <script src="main/controllers/edit-appointment-by-native-ctrl.js"></script>
+    <script src="main/controllers/default-ctrl.js"></script>
+    <script src="main/controllers/debug-ctrl.js"></script>
+    <script src="main/controllers/dashboard-ctrl.js"></script>
+    <script src="main/controllers/complaints-ctrl.js"></script>
+    <script src="main/controllers/catselection-ctrl.js"></script>
+    <script src="main/controllers/bookappointmentconfirm-ctrl.js"></script>
+    <script src="main/controllers/bookappointment-ctrl.js"></script>
+    <script src="main/controllers/book-appointment-by-nativemap-ctrl.js"></script>
+    <script src="main/controllers/bid-list-ctrl.js"></script>
+    <script src="main/controllers/bid-confirmation-ctrl.js"></script>
+    <script src="main/controllers/add-location-ctrl.js"></script>
+    <script src="main/controllers/accor-ctrl.js"></script>
+    <script src="main/controllers/about-ctrl.js"></script>
+    <script src="main/constants/config-const.js"></script>
+    <script src="cssloader.js"></script>
+    <script src="app.js"></script>
+    <!-- endinject -->
+    
+</body>
+
+</html>

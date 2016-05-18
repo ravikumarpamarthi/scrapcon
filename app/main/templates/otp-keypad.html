@@ -1,0 +1,70 @@
+<ion-header-bar class="bar-balanced bar-balanced-new" align-title="center">
+    <div class="buttons">
+        <button class="button ion-android-arrow-back button-clear" style="color:black;font-size:30px;" ng-click="closeOTPKeyPad(false)"></button>
+    </div>
+    <h1 class="title">Enter OTP</h1>
+</ion-header-bar>
+<ion-view view-title="" hide-back-button="true">
+    <!-- do you want padding? -->
+    <ion-content class="padding" has-bouncing="false">
+        <div class="row">
+            <div class="col text-center">
+                <h4>Pleaes enter OTP</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <span>
+                  <i class="icon ion-ios-circle-filled mr5" ng-repeat="p in otp track by $index"></i>
+                  <i class="icon ion-ios-circle-outline mr5" ng-repeat="i in (6-otp.length) | range"></i>
+                </span>
+            </div>
+        </div>
+        <div class="row-fluid" id="keypadTop">
+            <div class="col-key" ng-click="setOTP(1)">
+                <button class="button button-default keyboardCircle newactive">1</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(2)">
+                <button class="button button-default keyboardCircle newactive">2</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(3)">
+                <button class="button button-default keyboardCircle newactive">3</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(4)">
+                <button class="button button-default keyboardCircle newactive">4</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(5)">
+                <button class="button button-default keyboardCircle newactive">5</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(6)">
+                <button class="button button-default keyboardCircle newactive">6</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(7)">
+                <button class="button button-default keyboardCircle newactive">7</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(8)">
+                <button class="button button-default keyboardCircle newactive">8</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(9)">
+                <button class="button button-default keyboardCircle newactive">9</button>
+            </div>
+            <div class="col-key" ng-click="clearOTP()">
+                <button class="button button-default keyboardCircle newactive">CLR</button>
+            </div>
+            <div class="col-key" ng-click="setOTP(0)">
+                <button class="button button-default keyboardCircle newactive">0</button>
+            </div>
+            <div class="col-key" ng-click="removeOTP()">
+                <button class="button button-default keyboardCircle newactive">
+                    <i class="icon ion-backspace"></i>
+                </button>
+            </div>
+            <div class="clear" style="clear: both;"></div>
+        </div>
+    </ion-content>
+    <div ng-show="otp.length==6" class="tabs dashboardTabsStyle" ng-click="closeOTPKeyPad(true)">
+        <button class="button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+            OK
+        </button>
+    </div>
+</ion-view>

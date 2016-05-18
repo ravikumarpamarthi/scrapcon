@@ -1,0 +1,113 @@
+<ion-view  hide-nav-bar="false" cache-view="false" hide-back-button="true" title="Sell Later">
+ <!-- <ion-view title="Book Appointment" hide-nav-bar="false" cache-view="false" hide-back-button="true">
+  -->   <ion-content class="has-header" has-bouncing="false">
+        <div>
+            <div class="list padding marginBottom0 marginPaddingMix">
+                <div class="row">
+                    <div class="col col-90">
+                        <label ng-show="!newlocation" class="item item-input item-select padding5">
+                            <i class="icon ion-android-person placeholder-icon"></i>
+                            <select ng-model="selectedItem" ng-options="location as location.formattedAddress for location in locations" ng-change="setMap(selectedItem);" style="direction:ltr;padding-left:2px;">
+                                <option value="">Select Location</option>
+                            </select>
+                        </label>
+                        <label ng-show="newlocation" class="item item-input googlePlaceLabel">
+                            <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" />
+                        </label>
+                    </div>
+                    <div class="col col-10">
+                        <a class="balanced">
+                            <i class="icon" style="font-size:30px;" ng-class="{true: 'ion-plus-circled', false: 'ion-minus-circled'}[!newlocation]" ng-click="newlocation = !newlocation;managePlaceObject(newlocation)">
+                  </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--  <ion-list ng-show="newlocationDrop">
+                <div class="padding">
+                    <label class="item item-input googlePlaceLabel">
+                        <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" />
+                    </label>
+                </div>
+            </ion-list> -->
+            <div ng-if="placeError" class="errorDiv">Select Location</div>
+            <!-- content goes here -->
+            <div class="padding map-parent">
+                <ng-map ng-if="center" map-type-control=false zoom="14" center="{{center}}" style="height:250px;" zoom-control=false street-view-control=false>
+                    <marker draggable="true" position="{{center}}" on-dragend="markerDragEnd()" icon="main/assets/images/consumer.svg"></marker>
+                </ng-map>
+                <div class="map-child-target" ng-click="setCurrentLocation()"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div>
+            </div>
+            <div class="row tabRow">
+                <div class="col tabCol">
+                    <button class="button button-block tabButtonStyle" ng-init="ontime=true;" ng-click="ontime=true;recurring=false;scrollToBottom()" ng-class="(ontime)?'button-light-custom':'button-custom'">One Time
+                    </button>
+                </div>
+                <div class="col tabCol">
+                    <button class="button button-block tabButtonStyle" ng-click="ontime=false;recurring=true;scrollToBottom()" ng-class="(recurring)?'button-light-custom':'button-custom'">Recurring
+                    </button>
+                </div>
+            </div>
+            <div ng-show="ontime" class="padding" style="margin-top:-5px;margin-bottom:0px;padding-top:0px;padding-bottom:0px;">
+                <div class="row ontimeDateRow">
+                    <div class="col-50">
+                        <ionic-datepicker input-obj="datepickerObjectPopup">
+                            <button class="button button-small button-block button-light" style="text-align: left;border-color: #fff;"><i class="fa fa-calendar fa-2x"></i>&nbsp; {{datepickerObjectPopup.inputDate | date:'dd-MMM-yyyy'}}</button>
+                        </ionic-datepicker>
+                    </div>
+                    <div class="col-50" style="margin-top: 10px;">
+                        <i class="fa fa-clock-o fa-2x"></i>
+                        <select ng-options="slot.slotId as slot.slotName disable when slot.status == 'Disabled' for slot in slots"  ng-model="data.preferredSlot"class="" style="background-color: #fff; border-color: #fff;">
+                        </select>
+                    </div>
+                </div>
+                <hr>
+                <div class="row " style="height:40px;margin-top:-10px;padding-left:0px;">
+                    <div class="col"><i class="fa fa-money fa-2x"></i>
+                        <select style="width: 80%; background-color: transparent; border-color: #fff;" ng-options="paymentMode.value as paymentMode.value for paymentMode in paymentModes" ng-model="data.preferredPaymentMethod">
+                        </select>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div ng-show="recurring" class="padding" style="margin-top:-5px;margin-bottom:-5px;">
+                <div class="list" style="margin-bottom:10px;margin-top:-10px;">
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            <i class="fa fa-repeat"></i> Repeats
+                        </div>
+                        <select>
+                            <option selected>Repeats</option>
+                            <option>Daily</option>
+                            <option>Weekly</option>
+                            <option>Monthly</option>
+                        </select>
+                    </label>
+                </div>
+                <span><i class="fa fa-repeat"></i> Recurs</span>
+                <select>
+                    <option>Weekly</option>
+                    <option selected>On 1st day</option>
+                    <option>Daily</option>
+                </select>
+                <select>
+                    <option>Weekly</option>
+                    <option selected>Of every month</option>
+                    <option>Daily</option>
+                </select>
+            </div>
+            <!-- <div class="padding">
+                <div ng-if="placeError" class="errorDiv">Clear above errors</div>
+                <div ng-if="errorMessage" class="errorDiv" ng-bind="errorMessage"></div>
+                <a ng-click="sellNow('PICKUP')" type="button" class="button button-balanced button-block button-small">CONFIRM</a>
+            </div> -->
+        </div>
+        <div ng-show="dropat" class="padding">
+        </div>
+    </ion-content>
+        <div class="tabs dashboardTabsStyle">
+    
+        <button ng-click="sellNow('PICKUP')" type="button" class="button button-stable button-clear" style="font-size:16px;color:white;opacity:1;">CONFIRM</button>
+    
+    </div>
+</ion-view>

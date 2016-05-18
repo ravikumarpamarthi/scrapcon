@@ -1,0 +1,61 @@
+<ion-view hide-nav-bar="false" >
+   <!-- <ion-view hide-nav-bar="false" title="Profile">
+    --> <ion-content padding="true" class="has-header" has-bouncing="true">
+        <form>
+           <ion-list>
+                <label class="item item-input">
+                    <span class="input-label">Username</span>
+                    <input type="text" placeholder="enter Email/Mobile" ng-model="data.username">
+                </label>
+               <label class="item item-input">
+                    <span class="input-label">Mobile No.</span>
+                    <input type="text" placeholder="enter Mobile" ng-model="data.username">
+                </label>
+                 <label class="item item-input hidden">
+                    <span class="input-label">Email</span>
+                    <input type="email" placeholder="you@domain.com" ng-model="data.email">
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Password</span>
+                    <input type="password" placeholder="At least 6 characters" ng-model="data.password">
+                </label>
+            </ion-list>
+
+        </form>
+        <br>
+
+        <div class="item item-button-right item-balanced">
+    Locations
+    <button class="button button-icon button-positive">
+      <i class="icon ion-plus-circled"></i>
+    </button>
+  </div>
+
+        <ion-list>
+        <div ng-repeat="group in groups">
+          <ion-item class="item-stable"
+                    ng-click="toggleGroup(group)"
+                    ng-class="{active: isGroupShown(group)}">
+              <i class="icon" ng-class="isGroupShown(group) ? 'ion-minus' : 'ion-plus'"></i>
+            &nbsp;
+            Location {{group.name}}
+          </ion-item>
+          <ion-item class="item-accordion"
+                    ng-repeat="item in group.items"
+                    ng-show="isGroupShown(group)">
+            {{item}}
+          </ion-item>
+        </div>
+      </ion-list>
+
+            <div class="row">
+  <div class="col text-center">
+  <a class="button button-icon icon ion-checkmark"></a>
+
+  </div>
+  <div class="col text-center">
+  <a class="button button-icon icon ion-close-round"></a>
+</div>
+</div>
+    </ion-content>
+</ion-view>

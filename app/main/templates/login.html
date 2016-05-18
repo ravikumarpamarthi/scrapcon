@@ -1,0 +1,49 @@
+<ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false" title="Login">
+<!-- <ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false">
+ -->    <form name="loginForm" novalidate="" ng-submit="loginSubmit(loginForm,loginInfo)">
+        <ion-content padding="true" class="has-tabs has-header login_bg" has-bouncing="false" >
+            <ion-list>
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : loginForm.userName.$invalid && loginForm.$submitted, '' : loginForm.userName.$valid}">
+                <img ngCache src="main/assets/svg/user-agent1.svg" width="35px" height="30px"/>
+                    <!-- <i class="newSiteHeaderColor ion-ios-person-outline placeholder-icon fontSizeOneFifty"></i> -->
+                    <input type="tel" name="userName" ng-model="loginInfo.userName" required placeholder="Enter mobile Number" pattern="[0-9]*">
+                </label>
+                <div class="error-container" ng-show="loginForm.userName.$error && loginForm.$submitted" ng-messages="loginForm.userName.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+                <br>
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : loginForm.userName.$invalid && loginForm.$submitted, '' : loginForm.userName.$valid}" ng-click="openPasswordKeyPad();">
+                <img ngCache src="main/assets/svg/lock1.svg" width="35px" height="30px"/>
+                    <!-- <i class="newSiteHeaderColor ion-ios-unlocked-outline fontSizeOneFifty placeholder-icon"></i> -->
+                     <!-- <input type="hidden" name="password" ng-model="loginInfo.password" required placeholder="Enter Password" ng-click="openPasswordKeyPad();" class="hidden">  -->
+                    <div >
+                    <i class="icon ion-ios-circle-filled mr5" ng-repeat="p in password track by $index" ></i>
+                        <span ng-if="password.length==0" class="gray" >Enter Passcode</span>
+                    </div>
+
+                </label>
+                <div class="error-container" ng-show="loginForm.password.$error &&loginForm.$submitted" ng-messages="loginForm.password.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+                
+            </ion-list>
+            <div class="marginTop" style="position:relative;">
+            <a ui-sref="main.forgotpassword" style="margin-top:10px;float:right;color:gray;text-decoration:none;"> Forgot Passcode ?</a><br>
+            <a ui-sref="main.registration-new" style="margin-top:10px;position:absolute;top:0px;float:left;color:gray;text-decoration:none;">New User</a>
+            <!-- <span>
+              <button nav-transition="android" ui-sref="main.forgotpassword" menu-close class="button button-outline button-small button-positive">Forgot Password ?</button>
+            </span> -->
+            <!--<span class="flRight">
+            <a ui-sref="main.registration">New User</a>
+               <button nav-transition="android" ui-sref="main.registration" menu-close class="button button-outline button-small icon-left ion-person-add button-balanced" >New User</button> 
+            </span>-->
+            </div>
+           
+        </ion-content>
+        <div class="tabs dashboardTabsStyle">
+            <button class="button button-stable button-block  button-clear" type="submit" style="font-size:16px;color:white;opacity:1;margin-top: 0px;">
+                LOGIN
+            </button>
+        </div>
+    </form>
+</ion-view>

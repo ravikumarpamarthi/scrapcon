@@ -1,0 +1,101 @@
+<ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false" title="Sell">
+    <!-- <ion-view hide-nav-bar="false" view-title="Appointments" hide-back-button="true" cache-view="false"> -->
+    <marquee scrollamount="3" class="marqueeFixed">
+        <span ng-repeat="category in categories">{{category.name}}- {{category.price}} Rs/{{category.uom}}</span>
+    </marquee>
+    <ion-content ng-init="loadImages()" class="has-footer" id="dashboardIonContent" has-bouncing="false">
+        <div class="row" ng-repeat="category in categories" ng-if="$even">
+            <div class="col col-50 text-center firstboxborder" ng-if="categories[$index].name">
+                
+                <label class="dashboard checkbox-balanced item item-checkbox checkboxStyle">
+                <div class="white-circle">
+                    <img ngCache  ng-src="{{$root.getImageFileById}}/{{categories[$index].image}}.jpg" width="50%" />
+                    <br/>
+                    <span ng-bind="categories[$index].name"></span>
+                    <br/> <span class="colorGray proxToTop">{{categories[$index].uom}}-{{categories[$index].price}}Rs</span>
+                </div>
+                    <div id="firstCheckbox" class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle" ng-init="data[$index].qty=1">
+                        <input type="checkbox" data-checklist-model="data[$index].items" data-checklist-value="categories[$index]">
+                        <i class="checkbox-icon"></i>
+                    </div>
+                </label>
+                <div style="display:none; position:relative;top:15px;" ng-init="data[$index].qty=1"><span class="posTopNeg">Qty </span><span>{{data[$index].qty}}<!-- <input ng-class="{shade:inShades($index+1)}" class="bidinp" ng-model="data[$index].qty" type="tel"  style="text-align:left;"/> --></span>
+                    <span class="ltt" on-tap="decreaseQty($index)">-</span><span class="gtt" on-tap="increaseQty($index)">+</span>
+                    <!-- <span class="lt" on-tap="decreaseQty($index)"><i class="icon ion-minus-circled balanced"></i></span>
+                        <input ng-class="{shade:inShades($index+1)}" class="bidinp" ng-model="data[$index].qty" type="tel" />
+                        <span class="lt" on-tap="increaseQty($index)"><i class="icon ion-plus-circled balanced"></i></span> -->
+                </div>
+            </div>
+            <div class="col col-50 text-center secondboxborder" ng-if="categories[$index+1].name">
+                
+                <label class="checkbox-balanced item dashboard item-checkbox checkboxStyle">
+                <div class="white-circle">
+                    <img ngCache ng-src="{{$root.getImageFileById}}/{{categories[$index+1].image}}.jpg" width="50%" />
+                    <br/>
+                    <span ng-bind="categories[$index+1].name"></span>
+                    <br/><span class="colorGray proxToTop">{{categories[$index+1].uom}}-{{categories[$index+1].price}}Rs</span>
+                </div>
+                    <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle" ng-init="data[$index+1].qty=1" id="secondCheckbox">
+                        <input type="checkbox" data-checklist-model="data[$index+1].items" data-checklist-value="categories[$index+1]">
+                        <i class="checkbox-icon"></i>
+                    </div>
+                </label>
+                <div style="display:none;position:relative;top:15px;" ng-init="data[$index+1].qty=1"><span class="posTopNeg">Qty </span><span>{{data[$index+1].qty}}<!-- <input ng-class="{shade:inShades($index+1)}" class="bidinp" ng-model="data[$index].qty" type="tel"  style="text-align:left;"/> --></span>
+                    <span class="ltt" on-tap="decreaseQty($index+1)">-</span><span class="gtt" on-tap="increaseQty($index+1)">+</span>
+                    <!-- <span class="lt" on-tap="decreaseQty($index)"><i class="icon ion-minus-circled balanced"></i></span>
+                        <input ng-class="{shade:inShades($index+1)}" class="bidinp" ng-model="data[$index].qty" type="tel" />
+                        <span class="lt" on-tap="increaseQty($index)"><i class="icon ion-plus-circled balanced"></i></span> -->
+                </div>
+            </div>
+        </div>
+       <!--  <div class="hidden" ng-repeat="category in categories" id="dashboardCategories">
+            <div class="row" ng-if="$even">
+                <div class="col col-50 custom1 firstboxborder" ng-class="{shade:inShades($index+1)}">
+                    <div class="cat-circle">
+                        <label id="firstLabel" class="dashboard checkbox-balanced item item-checkbox checkboxStyle">
+                            <div class="item-content disable-pointer-events">
+                                <img ng-cache ng-src="{{$root.getImageFileById}}/{{categories[$index].image}}.jpg" class="imageDashboard" />
+                            </div>
+                            <div class="textCenter ">
+                                <span ng-bind="categories[$index].name"></span>
+                                <br/> <span class="colorGray">{{categories[$index].uom}}-{{categories[$index].price}}Rs</span>
+                            </div>
+                            <div id="firstCheckbox" class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle" ng-init="data[$index].qty=1">
+                                <input type="checkbox" data-checklist-model="data[$index].items" data-checklist-value="categories[$index]">
+                                <i class="checkbox-icon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="col col-50 custom1 secondboxborder" ng-if="categories[$index+1]" ng-class="{shade:inShades($index)}">
+                    <div class="cat-circle">
+                        <label id="secondLabel" class="checkbox-balanced item dashboard item-checkbox checkboxStyle">
+                            <div class="item-content disable-pointer-events">
+                                <img ng-cache ng-src="{{$root.getImageFileById}}/{{categories[$index+1].image}}.jpg" class="imageDashboard" />
+                            </div>
+                            <div class="textCenter ">
+                                <span ng-bind="categories[$index+1].name"></span>
+                                <br/><span class="colorGray">{{categories[$index+1].uom}}-{{categories[$index+1].price}}Rs</span>
+                            </div>
+                            <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle" ng-init="data[$index+1].qty=1" id="secondCheckbox">
+                                <input type="checkbox" data-checklist-model="data[$index+1].items" data-checklist-value="categories[$index+1]">
+                                <i class="checkbox-icon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    </ion-content>
+    <div class="tabs dashboardTabsStyle ">
+        <a class="tab-item" ng-click="sellNow()" style="border-right:1px solid white;opacity:1; overflow: initial;max-width:100% !important;font-weight:600; ">
+            PICK UP
+        </a>
+        <a class="tab-item item-text-wrap" ng-click="bookAppiontment()" style="border-left:1px solid white;opacity:1;max-width:100% !important; font-weight:600;">
+            DROP OFF
+        </a>
+        <!-- <a class="tab-item" style="font-size:1.2em;color:white;max-width:100px !important;opacity:1; overflow: initial; white-space: nowrap;" on-tap="placeBid()">
+            Bid
+        </a> -->
+    </div>
+</ion-view>

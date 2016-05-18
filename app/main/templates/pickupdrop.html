@@ -1,0 +1,77 @@
+<ion-view hide-nav-bar="false" cache-view="false" hide-back-button="true" title="Sell">
+    <!-- <ion-view hide-nav-bar="false" title="View Appointments" cache-view="false" hide-back-button="true">
+     -->
+    <div class="row tabRow tabRowNew b-sdow" >
+        <div class="col tabCol b-c-w" >
+            <button class="button button-block tabButtonStyle" ng-init="pending=true;" ng-click="completed=false;pending=true;scrollTop();"><span ng-class="(pending)?'pendingNewStyle':'completedNewStyle'">PICKUP AT</span>
+            </button>
+        </div>
+        <div class="col tabCol b-c-w" >
+            <button class="button button-block tabButtonStyle" ng-click="completed=true;pending=false;scrollTop();"><span ng-class="(completed)?'pendingNewStyle':'completedNewStyle'">DROP AT</span>
+            </button>
+        </div>
+    </div>
+    <ion-content class="paddingZero has-header m-t-15" has-bouncing="false">
+        <div ng-show="completed" class="m-t-50">
+        </div>
+        <div ng-show="pending" class="m-tb-50 pos-rel" >
+            <div class="inputsovermap" >
+                <div class="row padding">
+                    <div class="col bor-clr" >
+                        <input class="w-90-p" type="search" placeholder="Plot no 116, Road no 44, Jubliee hills..." ng-model="search">
+                        <button ng-if="search.length" class="input-button input-buttonnew button button-icon ion-ios-close-outline" ng-click="clearSearch()">
+                        </button>
+                    </div>
+                </div>
+                <div class="row padding">
+                    <div class="col bor-clr" >
+                        <input class="w-90-p" type="search" placeholder="Road no 44, Jubliee hills, Peddamma Talli..." ng-model="search1">
+                        <button ng-if="search1.length" class="input-button input-buttonnew1 button button-icon ion-ios-close-outline" ng-click="clearSearch()">
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row paddingZero row-center text-center">
+                <div class="col col-center">
+                    <div class="map-style"></div>
+                </div>
+            </div>
+            <div class="row paddingZero">
+                <div class="col col-50">
+                    <div class="row bor-clr" >
+                        <div class="col col-20 paddingZero">
+                            <img ngCache class="" src="main/assets/svg/time1.svg" width="35px" height="30px" />
+                        </div>
+                        <div class="col col-80">16:00 - 18:00</div>
+                    </div>
+                </div>
+                <div class="col col-50">
+                    <div class="row bor-clr" >
+                        <div class="col col-20 paddingZero"><img ngCache class="" src="main/assets/svg/calender.svg" width="35px" height="30px" /></div>
+                        <div class="col col-80">16/03/2016</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row paddingZero">
+                <div class="col">
+                    <div class="row bor-clr" >
+                        <div class="col col-10 paddingZero">
+                            <img ngCache class="" src="main/assets/svg/time1.svg" width="35px" height="30px" />
+                        </div>
+                        <div class="col col-90">
+                            <select class="" style="width:100%; background-color: transparent; border-color: #fff;" ng-model="data.preferredPaymentMethod">
+                                <option value="cash" selected>CASH</option>
+                                <option value="netbanking">NetBanking</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle" ng-click="closeOTPKeyPad()">
+        <button class="button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+            CONFIRM
+        </button>
+    </div>
+</ion-view>

@@ -1,0 +1,28 @@
+<div class="modal" >
+    <ion-header-bar class="bar-balanced">
+        <h1 class="title">Delete Addresses</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="true" style="margin-bottom:60px;">
+    <div style="overflow-y:scroll;overflow-x:hidden;height:510px;">
+    <div class="list">
+      <div class="item item-button-right" ng-model="profileData.defaultLocation" ng-repeat="location in locations">
+      {{location.formattedAddress}}
+      <button ng-if="locations.length>1" class="button button-default" ng-click="confirmDelete(location)" style="border:none;background-color:white;">
+          <i class="ion-close-circled" style="color:red;"></i>
+      </button>
+      </div>
+    </div>
+    </div>
+    <div class="padding">
+
+    </div>
+
+    </ion-content>
+
+  <div class="tabs dashboardTabsStyle">
+    <button ng-click="addressesToDeleteCloseModal()" class="button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+      Done
+    </button>
+  </div>
+
+</div>

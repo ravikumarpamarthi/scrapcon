@@ -1,0 +1,42 @@
+<ion-view hide-nav-bar="false"  cache-view="false" hide-back-button="true">
+    <!-- <ion-view hide-nav-bar="false" title="Confirmation" cache-view="false" hide-back-button="true">
+     --><ion-content padding="true" class="has-header">
+        <div class="row">
+            <div class="col col-44">Confirmation ID:</div>
+            <!-- <div class="col dashedBorder">{{sellDetails.confirmationId}}</div> -->
+            <div class="col">{{sellDetails.confirmationId}}</div>
+        </div>
+        <div class="row">
+            <div class="col col-44">Pickup Location:</div>
+            <div class="col">{{sellDetails.consumerAddress.formattedAddress}}</div>
+        </div>
+         <!-- <div class="padding map-parent">
+            <div id="confirm_map" style="width: 100%;height: 250px;">
+            </div>
+        </div> -->
+        <div class="row" style="margin-bottom:5px;">
+            <div class="col col-44">Pickup Date:</div>
+            <div class="col">{{sellDetails.preferredDate}}</div>
+        </div>
+        <div class="row" style="margin-bottom:5px;">
+            <div class="col col-44">Pickup Time:</div>
+            <div class="col">{{sellDetails.preferredSlot}}</div>
+        </div>
+        <div ng-if="sellDetails.agentName">
+            <div class="row" style="margin-bottom:5px;">
+                <div class="col col-44">Agent Name:</div>
+                <div class="col">{{sellDetails.agentName}}</div>
+            </div>
+            <div class="row">
+                <div class="col col-44">Agent Mobile:</div>
+                <div class="col">{{sellDetails.agentMobileNo}}</div>
+            </div>
+       <!--  </div>
+        <div class="padding" ng-if="!sellDetails.agentName">
+            <button type="button" ng-click="goToPendingList(sellDetails.confirmationId)" class="button button-balanced button-block">View Agent Details</button>
+        </div> -->
+         <div class="tabs dashboardTabsStyle" ng-show="!vm.confirmation">
+        <button ng-click="goToPendingList(sellDetails.confirmationId)" type="button" class="button button-stable button-clear" style="font-size:16px;color:white;opacity:1;">CONFIRM</button>
+    </div>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,40 @@
+{
+  "dependencies": {
+    "ionic": "~1.1.0",
+    "ionic-rating": "~0.1.0",
+    "angular": "~1.4.5",
+    "angular-animate": "~1.4.5",
+    "angular-sanitize": "~1.4.5",
+    "angular-ui-router": "~0.2.15",
+    "ngCordova": "~0.1.17-alpha",
+    "angular-dynamic-locale": "~0.1.27",
+    "angular-translate": "~2.8.1",
+    "angular-translate-loader-static-files": "~2.8.1",
+    "angular-localForage": "~1.2.3",
+    "font-awesome": "fontawesome#~4.5.0",
+    "angular-messages": "~1.4.8",
+    "ngmap": "~1.15.4",
+    "ionic-datepicker": "master",
+    "ionic-timepicker": "~0.4.0",
+    "angular-environment": "~1.0.3",
+    "angular-local-storage": "~0.2.3",
+    "angular-base64": "~2.0.5",
+    "checklist-model": "~0.8.0",
+    "angular-momentjs": "~0.2.2",
+    "angular-chart.js": "~0.8.8",
+    "imgcache.js": "~0.7.6",
+    "ion-affix": "~1.0.1",
+    "jquery": "~2.2.0"
+  },
+  "devDependencies": {
+    "angular-mocks": "~1.4.5"
+  },
+  "resolutions": {
+    "angular": "~1.4.5",
+    "angular-animate": "~1.4.5",
+    "angular-sanitize": "~1.4.5",
+    "angular-ui-router": "~0.2.15"
+  },
+  "name": "ScrapQ",
+  "private": true
+}

@@ -1,0 +1,39 @@
+<div class="modal">
+    <ion-header-bar class="bar-balanced bar-balanced-new">
+        <h1 class="title">Addresses</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="false">
+        <ion-list id="pendingItemList">
+        <ion-item ng-if="locations.length==0" class="item-text-wrap list-opt item" >
+        <div class="row">
+          <span>You seem to have not added your location yet</span>
+        </div>
+        </ion-item>
+            <ion-item class="item-text-wrap list-opt" ng-repeat="location in locations" ng-click="setDefaultLocation(location)">
+                <div class="row">
+                    <div class="col-75">
+                        <span>{{location.formattedAddress}}
+                  </span>
+                    </div>
+                    <div class="col-10">
+                        <span style="font-size: 20px;" ng-if="data.defaultLocation.addressId==location.addressId" class="icon ion-checkmark"></span>
+                    </div>
+                    <div class="col-15" ng-if="locations.length>1" ng-click="confirmDelete(location,$index);$event.stopPropagation()">
+                        <span style="font-size: 20px;" class="ion-close-circled" style="border:none;background-color:white;"></span>
+                    </div>
+                </div>
+            </ion-item>
+            <ion-item class="item-text-wrap list-opt item" style="
+    margin-bottom: 25px;border-bottom: none;">
+            </ion-item>
+        </ion-list>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle ">
+        <a class="tab-item" ng-click="addressesCloseModal()" style="font-size:1.2em;color:white;opacity:1; overflow: initial; white-space: nowrap;">
+            Done
+        </a>
+    </div>
+    <div class="fixed-outside">
+        <button ng-click="addLocation()" class="button button-circle  button-balanced newSiteBgColor icon ion-plus pull-right"></button>
+    </div>
+</div>

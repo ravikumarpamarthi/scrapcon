@@ -1,0 +1,189 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <!-- CONTENT -->
+    <ion-side-menu-content>
+        <!-- header bar -->
+        <!-- the nav bar will be updated as we navigate between views -->
+        <ion-nav-bar class="bar-balanced bar-balanced-new" align-title="center">
+            <!-- back button, shown if applicable -->
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="right">
+                <!-- <img class="title-image" src="main/assets/images/scrapq-logo.png" /> -->
+                <div ng-if="showHelp" ng-click="showWalkthrough()" style="width:35px;height:35px;border-radius:20px;border:1px solid white;background-color:rgba(255, 255, 255, 0);padding-top: 7px;margin-right:10px;">
+                    <img ngCache src="main/assets/svg/signs.svg" width="35px" height="21px" />
+                </div>
+                <div style="width:35px;height:35px;border-radius:20px;border:1px solid white;background-color:#00B4FF;">
+                    <img ngCache src="main/assets/svg/missedcall1.svg" width="35px" height="30px" onclick="document.location.href ='tel:+919030727277'" />
+                </div>
+                <!-- <button  class=" button button-icon button-clear ion-ios-telephone-outline" onclick="document.location.href ='tel:+919030727277'"></button> -->
+            </ion-nav-buttons>
+            <ion-nav-title>
+                <img ngCache alt="Company Logo" class="title-image hidden" src="main/assets/images/scrapq-logo.png" ng-click="go('main.dashboard')">
+            </ion-nav-title>
+            <!-- nav button, shown if applicable -->
+            <ion-nav-buttons side="left">
+                <a ng-click="go('main.offers')" ng-if="documentCount>0" ng-click="toggleSearchBox()" style="
+    font-size: 20px;
+    margin-top: 7px;
+    margin-right: 5px;
+" class="fa fa-gift">
+                    <span style="
+    border-radius: 50%;
+    font-size: 12px;
+    margin-top: -31px;
+    font-weight:100;
+    padding: 0px 4px;
+" class="badge badge-assertive" ng-bind="documentCount"></span></a>
+                <button ng-show="!opened" class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="opened=false" style="color:black;">
+                </button>
+                <!--  <img src="main/assets/images/logo-menu.png" style="max-width:45%;height:auto;" menu-toggle="left" ng-click="opened=false"/> -->
+                <button ng-show="opened" class="button button-icon button-clear ion-android-arrow-forward" menu-toggle="right" ng-click="opened=true">
+                </button>
+                <img ngCache src="main/assets/images/logo-menu.png" style="position:absolute;left:10%;width:12%;top:0px;" />
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <!-- ROUTING INJECTED HERE: pageContent -->
+        <ion-nav-view name="pageContent" cache-view="false">
+        </ion-nav-view>
+    </ion-side-menu-content>
+    <!-- SIDEMENU -->
+    <ion-side-menu side="left" id="side-menu-left">
+        <!-- menu header -->
+        <ion-header-bar class="bar-balanced bar-balanced-new">
+            <h1 class="title"><img ngCache class="title-image-nav" src="main/assets/images/scrapq-logo.png"/></h1>
+        </ion-header-bar>
+        <!-- menu content -->
+        <ion-content has-bouncing="true" id="menu-content-id">
+            <ion-list>
+                <div ng-if="authentication">
+                    <ion-item menu-close ng-click="go('main.myaccount')">
+                        <div class="row">
+                            <div class="col col-20">
+                                <img ngCache src="main/assets/menusvgs/myaccount.svg" width="45px" height="35px" />
+                                <!-- <i class="icon ion-ios-circle-outline" style="position:relative;top:1px;font-size:35px;color:#33CD5F;"></i>
+                                <i class="icon ion-ios-person-outline" style="position:relative;left:-29px;font-size:33px;color:#33CD5F;"></i> -->
+                            </div>
+                            <div class="col col-center">
+                                My Account
+                            </div>
+                        </div>
+                    </ion-item>
+                    <ion-item menu-close ng-click="go('main.dashboard')">
+                        <div class="row">
+                            <div class="col col-20">
+                                <img ngCache src="main/assets/menusvgs/sell.svg" width="45px" height="35px" />
+                                <!-- <i class="icon ion-ios-speedometer-outline double-Icon" style="color:#33CD5F;"></i> --></div>
+                            <div class="col col-center">Sell</div>
+                        </div>
+                    </ion-item>
+                    <ion-item menu-close ng-click="go('main.viewappnts')">
+                        <div class="row">
+                            <div class="col col-20">
+                                <img ngCache src="main/assets/menusvgs/appointment.svg" width="45px" height="35px" />
+                                <!-- <i class="icon ion-ios-book-outline double-Icon" style="color:#33CD5F;"></i> --></div>
+                            <div class="col col-center">My Appointments</div>
+                        </div>
+                    </ion-item>
+                    <ion-item menu-close onclick="document.location.href ='tel:+919030727277'">
+                        <div class="row">
+                            <div class="col col-20">
+                                <img ngCache src="main/assets/menusvgs/call.svg" width="45px" height="35px" />
+                                <!-- <i class="icon ion-ios-telephone-outline" style="position:relative;top:6px;font-size:35px;color:#33CD5F;"></i> -->
+                            </div>
+                            <div class="col col-center">
+                                Call Me Back</div>
+                        </div>
+                    </ion-item>
+                    <!-- <ion-item menu-close href="#/main/sellconfirm/SQ00000020">
+                        <div class="row">
+                            <div class="col col-20"><i class="icon ion-ios-speedometer-outline double-Icon" style="color:#33CD5F;"></i></div>
+                            <div class="col col-center">confirmation</div>
+                        </div>
+                    </ion-item> -->
+                    <!-- <ion-item menu-close ng-click="go('main.bid-list')">
+                        <div class="row">
+                            <div class="col col-20"><i class="fa fa-legal double-Icon" style="color:#33CD5F;transform:rotate(90deg);"></i></div>
+                            <div class="col col-center">Bids</div>
+                        </div>
+                    </ion-item> -->
+                    <ion-item menu-close ng-click="go('main.offers')">
+                        <div class="row">
+                            <div class="col col-20">
+                                <img ngCache src="main/assets/menusvgs/offer.svg" width="45px" height="35px" />
+                                <!-- <i class="fa fa-gift double-Icon" style="color:#33CD5F;"> </i> -->
+                            </div>
+                            <div class="col col-center">Offers</div>
+                        </div>
+                    </ion-item>
+                    <ion-item menu-close ng-click="go('main.trends')">
+                        <div class="row">
+                            <div class="col col-20">
+                                <img ngCache src="main/assets/menusvgs/price-trends.svg" width="45px" height="35px" />
+                                <!-- <i class="icon ion-arrow-graph-up-right double-Icon" style="color:#33CD5F;"></i> -->
+                            </div>
+                            <div class="col col-center">Price Trends</div>
+                        </div>
+                    </ion-item>
+                    <!--
+                    <ion-item menu-close ng-click="go('main.refer')">
+                        <div class="row">
+                            <div class="col col-20"><i class="icon ion-ios-people-outline double-Icon" style="color:#33CD5F;font-size:35px;"></i></div>
+                            <div class="col col-center">Refer a Friend</div>
+                        </div>
+                    </ion-item>-->
+                    <ion-item ng-if="authentication" menu-close ng-click="openShare();">
+                        <div class="row">
+                            <div class="col col-20">
+                                <img ngCache src="main/assets/menusvgs/share.svg" width="45px" height="35px" />
+                                <!-- <i class="icon ion-android-share-alt double-Icon" style="color:#33CD5F;"></i> -->
+                            </div>
+                            <div class="col col-center">Share</div>
+                        </div>
+                    </ion-item>
+                    <ion-item menu-close ng-click="go('main.complaints')">
+                        <div class="row">
+                            <div class="col col-20">
+                                <img ngCache src="main/assets/menusvgs/feedback.svg" width="45px" height="35px" />
+                                <!-- <i class="icon ion-ios-chatboxes-outline double-Icon" style="color:#33CD5F;"></i> -->
+                            </div>
+                            <div class="col col-center">Feedback</div>
+                        </div>
+                    </ion-item>
+                </div>
+                <ion-item menu-close ng-click="go('main.faq')">
+                    <div class="row">
+                        <div class="col col-20"><i class="icon ion-ios-help-outline double-Icon" style="color:#BDD84D;padding-left:10px;"></i></div>
+                        <div class="col col-center">FAQs</div>
+                    </div>
+                </ion-item>
+                <ion-item menu-close ng-click="go('main.about')">
+                    <div class="row">
+                        <div class="col col-20"><i class="icon ion-ios-information-outline double-Icon" style="color:#BDD84D;padding-left:10px;"></i></div>
+                        <div class="col col-center">About ScrapQ</div>
+                    </div>
+                </ion-item>
+                <ion-item ng-if="authentication" menu-close ng-click="go('main.login')">
+                    <div class="row">
+                        <div class="col col-20"><i class="icon ion-log-out double-Icon" style="color:#BDD84D;padding-left:10px;"></i></div>
+                        <div class="col col-center">Logout</div>
+                    </div>
+                </ion-item>
+                <!-- <div ng-if="!authentication">
+                    <ion-item menu-close ng-click="go('main.login')">
+                        <div class="row">
+                            <div class="col col-20"><i class="icon ion-log-in double-Icon" style="color:#33CD5F;"></i></div>
+                            <div class="col col-center">Login</div>
+                        </div>
+                    </ion-item>
+                    <ion-item menu-close ng-click="go('main.forgotpassword')">
+                        <div class="row">
+                            <div class="col col-20"><i class="icon ion-ios-locked-outline" style="position:relative;top:6px;font-size:35px;color:#33CD5F;"></i>
+                                <i class="icon ion-ios-help-outline" style="position:relative;top:-10px;left:-13px;font-size:25px;color:#33CD5F;"></i></div>
+                            <div class="col col-center">Forgot Password</div>
+                        </div>
+                    </ion-item>
+                </div> -->
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>

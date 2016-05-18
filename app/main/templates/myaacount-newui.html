@@ -1,0 +1,118 @@
+<ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false" title="ACCOUNT">
+    <!-- <ion-view hide-nav-bar="false" view-title="Appointments" hide-back-button="true" cache-view="false"> -->
+    <form name="myAccountForm" novalidate>
+    <ion-content class="has-footer" has-bouncing="false">
+        <div class="row">
+            <div class="col col-50 text-center ma-first-box">
+                <span>ScrapQ Money</span>
+                <div class="ma-pos-rel">
+                    <div class="ma-circle">
+                        <img ngCache src="main/assets/images/wallet.png" class="honor-img-res ma-m-t-10" width="70px" height="70px" />
+                    </div>
+                </div>
+                <span ng-bind="profileData.walletBalance"></span>
+            </div>
+            <div class="col col-50 text-center ma-second-box">
+                <span>Honor</span>
+                <div class="ma-pos-rel">
+                    <div class="ma-circle">
+                        <img ngCache src="main/assets/images/cup-character.png" class="honor-img-res ma-m-t-10" width="70px" height="70px" />
+                    </div>
+                </div>
+                <span>{{profileData.name}}</span>
+                <div>
+                    <i class="icon ion-android-star-outline honor-star"></i>
+                    <i class="icon ion-android-star-outline honor-star"></i>
+                    <i class="icon ion-android-star-outline honor-star"></i>
+                </div>
+            </div>
+        </div>
+        <div class="row ma-m-b-2" >
+            <div class="col paddingZero">
+                <div  class="item item-input removeBorders">
+                    <img ngCache src="main/assets/svg/user-agent1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                    <span ng-show="!editForm.name" class="gray width100">{{profileData.name}}</span>
+                    <input ng-show="editForm.name" type="text" placeholder="Name" name="name" ng-model="profileData.name" required>
+                    <span ng-click="edit('name')">
+                     <img ngCache ng-show="!editForm.name"  src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                    </span>
+                </div>
+                <div class="error-container"  ng-show="init && myAccountForm.name.$error && myAccountForm.$submitted" ng-messages="myAccountForm.name.$error">
+                <div ng-messages-include="error-list.html"></div>
+               </div>
+            </div>
+        </div>
+        <div class="row ma-m-b-2" >
+            <div class="col paddingZero">
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : loginForm.userName.$invalid && loginForm.$submitted, '' : loginForm.userName.$valid}">
+                    <img ngCache src="main/assets/svg/mobile1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                    <!-- <i class="newSiteHeaderColor ion-ios-person-outline placeholder-icon fontSizeOneFifty"></i> -->
+                    <input type="text" name="userName" ng-model="loginInfo.userName" required placeholder="9247238534">
+                    <img ngCache src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                </label>
+                <div class="error-container" ng-show="loginForm.userName.$error && loginForm.$submitted" ng-messages="loginForm.userName.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row ma-m-b-2" >
+            <div class="col paddingZero">
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : loginForm.userName.$invalid && loginForm.$submitted, '' : loginForm.userName.$valid}">
+                    <img ngCache src="main/assets/svg/email1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                    <!-- <i class="newSiteHeaderColor ion-ios-person-outline placeholder-icon fontSizeOneFifty"></i> -->
+                    <input type="text" name="userName" ng-model="loginInfo.userName" required placeholder="ravikumar.p@gmail.com">
+                    <img ngCache src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                </label>
+                <div class="error-container" ng-show="loginForm.userName.$error && loginForm.$submitted" ng-messages="loginForm.userName.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row ma-m-b-2" >
+            <div class="col paddingZero">
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : loginForm.userName.$invalid && loginForm.$submitted, '' : loginForm.userName.$valid}">
+                    <img ngCache src="main/assets/svg/office1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                    <!-- <i class="newSiteHeaderColor ion-ios-person-outline placeholder-icon fontSizeOneFifty"></i> -->
+                    <input type="text" name="userName" ng-model="loginInfo.userName" required placeholder="NBT Nagar Rd, Potigadda, Begu..">
+                    <img ngCache src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                </label>
+                <div class="error-container" ng-show="loginForm.userName.$error && loginForm.$submitted" ng-messages="loginForm.userName.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row ma-m-b-2" >
+            <div class="col paddingZero">
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : loginForm.userName.$invalid && loginForm.$submitted, '' : loginForm.userName.$valid}">
+                    <img ngCache src="main/assets/svg/home1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                    <!-- <i class="newSiteHeaderColor ion-ios-person-outline placeholder-icon fontSizeOneFifty"></i> -->
+                    <input type="text" name="userName" ng-model="loginInfo.userName" required placeholder="NBT Nagar Rd, Potigadda, Begu..">
+                    <img ngCache src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                </label>
+                <div class="error-container" ng-show="loginForm.userName.$error && loginForm.$submitted" ng-messages="loginForm.userName.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row ma-m-b-2" >
+            <div class="col paddingZero">
+                <label class="item item-input removeBorders" ng-class="{ 'has-errors' : loginForm.userName.$invalid && loginForm.$submitted, '' : loginForm.userName.$valid}">
+                    <img ngCache src="main/assets/svg/key1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                    <!-- <i class="newSiteHeaderColor ion-ios-person-outline placeholder-icon fontSizeOneFifty"></i> -->
+                    <input type="text" name="userName" ng-model="loginInfo.userName" required placeholder="Change Password">
+                    <img ngCache src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                </label>
+                <div class="error-container" ng-show="loginForm.userName.$error && loginForm.$submitted" ng-messages="loginForm.userName.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+    <div class="tabs dashboardTabsStyle" ng-click="sub(profileData,myAccountForm)">
+        <a class="tab-item" style="border-right:1px solid white;opacity:1; overflow: initial;max-width:100% !important;font-weight:600; ">
+            SUBMIT
+        </a>
+    </div>
+    </form>
+</ion-view>

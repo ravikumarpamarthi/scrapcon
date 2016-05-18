@@ -1,0 +1,82 @@
+<ion-header-bar class="bar-balanced bar-balanced-new" align-title="center">
+<div class="buttons">
+            <button class="button ion-android-arrow-back button-clear" style="color:black;font-size:30px;" ng-click="closePasswordKeyPad()"></button>
+        </div>
+        <h1 class="title">Enter Password</h1>
+        
+    </ion-header-bar>
+<ion-view view-title="" hide-back-button="true">
+    <!-- do you want padding? -->
+    <ion-content class="padding" has-bouncing="false">
+        <div class="row">
+            <div class="col text-center">
+                <h4>Pleaes enter password</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <span>
+                  <i class="icon ion-ios-circle-filled"></i>
+                  <i class="icon ion-ios-circle-outline"></i>
+                  <i class="icon ion-ios-circle-outline"></i>
+                  <i class="icon ion-ios-circle-outline"></i>
+                  <i class="icon ion-ios-circle-outline"></i>
+                  <i class="icon ion-ios-circle-outline"></i>
+                </span>
+            </div>
+        </div>
+        <div class="row" id="keypadTop">
+            <div class="col col-offset-10">
+                <div class="row text-center">
+                    <div class="col">
+                        <div class="keyboardCircle">1</div>
+                    </div>
+                    <div class="col">
+                        <div class="keyboardCircle">2</div>
+                    </div>
+                    <div class="col">
+                        <div class="keyboardCircle">3</div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col">
+                        <div class="keyboardCircle">4</div>
+                    </div>
+                    <div class="col">
+                        <div class="keyboardCircle">5</div>
+                    </div>
+                    <div class="col">
+                        <div class="keyboardCircle">6</div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col">
+                        <div class="keyboardCircle">7</div>
+                    </div>
+                    <div class="col">
+                        <div class="keyboardCircle">8</div>
+                    </div>
+                    <div class="col">
+                        <div class="keyboardCircle">9</div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col"></div>
+                    <div class="col">
+                        <div class="keyboardCircle">0</div>
+                    </div>
+                    <div class="col">
+                        <div style="margin-top: 15px;margin-left: -20px;">
+                            <i class="icon ion-backspace fontSizeDouble"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle">
+            <button class="button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+                OK
+            </button>
+        </div>
+</ion-view>

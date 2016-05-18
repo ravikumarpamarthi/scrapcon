@@ -1,0 +1,12 @@
+    <label class="item item-input">
+        <!-- <input type="text" placeholder="Enter flat/house address" name="name" ng-model="vm.customadd" required> -->
+        <textarea ng-model="vm.customadd" name="customadd" placeholder="Enter flat/house address" rows="3" required>
+        </textarea>
+        <a ng-if="vm.customadd != ''" on-touch="vm.customadd='';vm.sameasabove=false">
+            <i class="icon ion-ios-close placeholder-icon"></i>
+        </a>
+    </label>
+    <div class="errorDiv" ng-if="vm.customaddError && vm.customadd==''">
+        Please enter flat/house address
+    </div>
+<ion-checkbox ng-model="vm.sameasabove">Same as my location</ion-checkbox>

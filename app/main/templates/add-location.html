@@ -1,0 +1,33 @@
+<ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false" title="Select Location">
+    <!-- <ion-view hide-nav-bar="false" view-title="Select Location" hide-back-button="true" cache-view="false"> -->
+    <ion-content class="has-header has-footer" has-bouncing="false">
+        <ion-list>
+            <div class="" style="padding-bottom: 0px;">
+                <label class="item item-input" style="white-space:normal;">
+                    <input type="text" placeholder="Enter flat/house Number" name="name" ng-model="vm.customadd" ng-focus="disableTap('autocomplete')" ng-blur="mapSetClickable(true)">
+                    <a ng-if="vm.customadd != ''" on-touch="vm.customadd=''">
+                    <i class="icon ion-ios-close placeholder-icon"></i>
+                </a>
+                </label>
+            </div>
+            <div class="" style="padding-top: 1px;">
+                <label class="item item-input" style="white-space:normal;">
+                    <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap('autocomplete')" ng-blur="mapSetClickable(true)" />
+                    <a ng-if="vm.formattedAddress != ''" on-touch="onHold()">
+                        <i class="icon ion-ios-close placeholder-icon"></i>
+                    </a>
+                </label>
+            </div>
+        </ion-list>
+        <div class="map-parent">
+            <div id="map_canvas" class="mmap">
+                <div class="map-child-target" ng-click="setCurrentLocation()"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div>
+            </div>
+        </div>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle" ng-click="addLocation(chosenPlace,chosenPlaceObj)">
+        <button   class="item-icon-left button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+            <i class="icon ion-map"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Location
+        </button>
+    </div>
+</ion-view>

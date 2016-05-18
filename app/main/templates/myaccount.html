@@ -1,0 +1,142 @@
+<ion-view cache-view="false" hide-nav-bar="false" hide-back-button="true" title="My Account">
+    <!-- <ion-view title="My Account" cache-view="false" hide-nav-bar="false" hide-back-button="true">
+ -->
+    <form name="myAccountForm" novalidate>
+        <ion-content class="has-header has-footer" has-bouncing="false">
+            <div class="row paddingZero">
+                <div class="col col-50 text-center ma-first-box">
+                    <span>ScrapQ Money</span>
+                    <div class="ma-pos-rel">
+                        <div class="ma-circle">
+                            <img ngCache src="main/assets/images/wallet.png" class="honor-img-res ma-m-t-10" width="70px" height="70px" />
+                        </div>
+                    </div>
+                    <span ng-bind="profileData.walletBalance"></span>
+                </div>
+                <!-- <div class="col col-50 text-center ma-second-box" ng-click="go('main.honor')"> -->
+                <div class="col col-50 text-center ma-second-box">
+                    <span>Honor</span>
+                    <div class="ma-pos-rel">
+                        <div class="ma-circle">
+                            <img ngCache src="main/assets/images/cup-character.png" class="honor-img-res ma-m-t-10" width="70px" height="70px" />
+                        </div>
+                    </div>
+                    <span>{{profileData.name}}</span>
+                    <div>
+                        <i class="icon ion-android-star-outline honor-star"></i>
+                        <i class="icon ion-android-star-outline honor-star"></i>
+                        <i class="icon ion-android-star-outline honor-star"></i>
+                        <i class="icon ion-android-star-outline honor-star"></i>
+                        <i class="icon ion-android-star-outline honor-star"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="row " style="margin-top:5px;">
+                <div class="col paddingZero" >
+                    <div class="item item-input removeBorders">
+                        <img ngCache src="main/assets/svg/user-agent1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                        <span style="margin-top:1px;" ng-show="!editForm.name" class="width100 ma-fs-14">{{profileData.name}}</span>
+                        <input ng-show="editForm.name" type="text" placeholder="Name" name="name" id="myaccountName" ng-model="profileData.name" required >
+                        <span ng-click="edit('name');focus('myaccountName')">
+                         <img ngCache ng-show="!editForm.name"  src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                        </span>
+                    </div> 
+                </div>
+            </div>
+            <div class="error-container hidden" ng-class="{hidden:!init}" ng-show="init && myAccountForm.name.$error && myAccountForm.$submitted" ng-messages="myAccountForm.name.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <div class="row ma-m-b-2">
+                <div class="col paddingZero">
+                    <div class="item item-input removeBorders">
+                        <img ngCache src="main/assets/svg/mobile1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                        <span class="gray width100">{{profileData.mobileNo}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row ma-m-b-2">
+                <div class="col paddingZero">
+                    <div class="item item-input removeBorders">
+                        <img ngCache src="main/assets/svg/email1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                        <span style="margin-top:1px;" ng-show="!editForm.emailId" class="width100 ma-fs-14">{{profileData.emailId || 'Email ID'}}</span>
+                        <input ng-show="editForm.emailId" type="email" name="email" placeholder="Email ID" ng-model="profileData.emailId" ng-pattern="/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/" id="myaccountEmail">
+                        <span ng-click="edit('emailId');;focus('myaccountEmail')">
+                         <img ngCache ng-show="!editForm.emailId"  src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                         </span>
+                    </div>
+                </div>
+            </div>
+            <p class="hidden" ng-class="{hidden:!init}" ng-show="myAccountForm.email.$error.pattern && init">
+                <font style="color:red">Please Enter valid Email</font>
+            </p>
+            <p ng-if="EC_ALREADY_REGISTERED_EMAILID">
+                <font style="color:red" ng-bind="EC_ALREADY_REGISTERED_EMAILID"></font>
+            </p>
+            <div class="row ma-m-b-2">
+                <div class="col paddingZero">
+                    <div class="item item-input removeBorders" style="margin-top:-10px;">
+                        <img ngCache src="main/assets/svg/key1.svg" class="ma-img-m-l" width="40px" height="30px" />
+                        <span style="margin-left:-5px;margin-top:1px;" ng-if="password.length==0" class="width100 ma-fs-14">Change Passcode</span>
+                        <div ng-if="password.length>0" class="width100"> 
+                         <i class="icon ion-ios-circle-filled mr5" ng-repeat="p in password track by $index"></i>
+                       </div>
+                        <span ng-click="openPasswordKeyPad()">
+                         <img ngCache  src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                         </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row ma-m-b-2">
+                <div class="col paddingZero">
+                    <div class="item item-input removeBorders">
+                        <img ngCache src="main/assets/svg/office1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                        <div class="width100" style="overflow:hidden;text-overflow:ellipsis;">
+                            <span ng-repeat="category in profileData.categories" class="myAccountCategoriesFontSize">
+                        {{category.value | camelCaseFilter}}{{(!$last)?', ':''}}
+                        </span> {{(profileData.categories.length>0)?'':'Add Categories'}}
+                        </div>
+                        <span ng-click="edit('category');showCategories()">
+                         <img ngCache  src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                         </span>
+                    </div>
+                </div>
+            </div>
+            <!-- <label class="item item-input custom-margin10" ng-click="showCategories()">
+                <i class="icon ion-ios-list-outline placeholder-icon fontSizeDouble"></i>
+                <div class="selectLocationDiv">
+                    <span ng-repeat="category in profileData.categories" class="myAccountCategoriesFontSize">
+                        {{category.value | camelCaseFilter}}{{(!$last)?', ':''}}
+                    </span> {{(profileData.categories.length>0)?'':'Add Categories'}}
+                </div>
+            </label> -->
+            <div class="errorDiv" ng-if="noCategoryError">{{noCategoryError}}</div>
+            <div class="row ma-m-b-2">
+                <div class="col paddingZero">
+                    <div class="item item-input removeBorders">
+                        <img ngCache src="main/assets/svg/home1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                        <div class="selectLocationDiv width100" style="margin-left:0px;">
+                        <span class="myAccountCategoriesFontSize">{{(data.defaultLocation.formattedAddress)?data.defaultLocation.formattedAddress:'Add default location'}}</span>
+                        </div>
+                         <span ng-click="edit('location');showAddresses()">
+                         <img  ngCache src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                         </span>
+                    </div>
+                    <div class="errorDiv" ng-if="noLocationError && init">{{noLocationError}}</div>
+                </div>
+            </div>
+
+           
+            <div class="error-container" ng-show="myAccountForm.password.$error &&myAccountForm.$submitted" ng-messages="myAccountForm.password.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <p ng-if="EC_ALREADY_REGISTERED_EMAILID">
+                <font style="color:red" ng-bind="EC_ALREADY_REGISTERED_EMAILID"></font>
+            </p>
+        </ion-content>
+        <div class="tabs dashboardTabsStyle" ng-click="sub(profileData,myAccountForm)">
+            <button class="button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+                SUBMIT
+            </button>
+        </div>
+    </form>
+</ion-view>

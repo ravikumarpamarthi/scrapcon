@@ -1,0 +1,76 @@
+{
+  "status": "SUCCESS",
+  "data": {
+    "message": "Category Price trends retrieved successully",
+    "priceTrends": [
+      {
+        "categoryId": "56799c9a102c112568b12345",
+        "name": "Plastic",
+        "code": "PLASTIC",
+        "image": "Plastic.jpg",
+        "price": "9.50",
+        "uom": "Kg",
+        "trend": [
+          {
+            "name": "Dec",
+            "value": "9.50"
+          },
+          {
+            "name": "Nov",
+            "value": "9.00"
+          },
+          {
+            "name": "Oct",
+            "value": "9.50"
+          },
+          {
+            "name": "Sep",
+            "value": "9.50"
+          },
+          {
+            "name": "Aug",
+            "value": "9.50"
+          },
+          {
+            "name": "Jul",
+            "value": "9.50"
+          }
+        ]
+      },
+      {
+        "categoryId": "56799c9a102c112568b98765",
+        "name": "Paper",
+        "code": "PAPER",
+        "image": "Paper.jpg",
+        "price": "8.50",
+        "uom": "Kg",
+        "trend": [
+          {
+            "name": "Dec",
+            "value": "9.25"
+          },
+          {
+            "name": "Nov",
+            "value": "8.00"
+          },
+          {
+            "name": "Oct",
+            "value": "9.00"
+          },
+          {
+            "name": "Sep",
+            "value": "9.50"
+          },
+          {
+            "name": "Aug",
+            "value": "9.50"
+          },
+          {
+            "name": "Jul",
+            "value": "9.50"
+          }
+        ]
+      }
+    ]
+  }
+}

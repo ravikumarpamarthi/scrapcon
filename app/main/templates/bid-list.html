@@ -1,0 +1,90 @@
+<ion-view hide-nav-bar="false"  hide-back-button="true" cache-view="false">
+   <!-- <ion-view hide-nav-bar="false" view-title="Bids" hide-back-button="true" cache-view="false">
+    --> <!-- do you want padding? -->
+    <ion-content class="has-header" has-bouncing="false">
+        <div class="row tabRow" ion-affix data-affix-within-parent-with-class="has-header">
+            <div class="col tabCol">
+                <button ng-init="pending=true;getPendingRequests();" class="button button-block tabButtonStyle" ng-click="completed=false;pending=true;getPendingRequests();" ng-class="(pending)?'button-light-custom':'button-custom'">Pending
+                </button>
+            </div>
+            <div class="col tabCol">
+                <button class="button button-block tabButtonStyle" ng-click="completed=true;pending=false;getCompletedRequests();" ng-class="(completed)?'button-light-custom':'button-custom'">Completed
+                </button>
+            </div>
+        </div>
+        <div ng-show="completed">
+            <div class="row" ng-if="completedBids.length==0">
+                <span class="col siteColor appointmentDate">No Completed Bids</span>
+            </div>
+            <ion-list>
+                <ion-item class="paddingZero" ng-repeat="item in completedBids" style="paddding:0px;">
+                    <div class="row">
+                        <div class="col">
+                            <span class="siteColor" style="font-size:17px;">{{item.requestedDate}} {{item.requestedTime}}
+                        </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-50">
+                           Confirmation Id
+                        </div>
+                        <div class="col col-50">
+                           : {{item.confirmationId}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-50">
+                           Status
+                        </div>
+                        <div class="col col-50">
+                           : {{item.status}}
+                        </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </div>
+        <div ng-show="pending">
+            <div class="row" ng-if="pendingBids.length==0">
+                <span class="col siteColor appointmentDate">No Pending Bids</span>
+            </div>
+            <ion-list id="bidlistId" show-delete="shouldShowDelete" show-reorder="shouldShowReorder" can-swipe="listCanSwipe">
+                <ion-item ng-repeat="item in pendingBids" ng-click="showBid(item.confirmationId)">
+                    <div class="row">
+                        <div class="col">
+                            <span class="siteColor" style="font-size:17px;">{{item.requestedDate}} {{item.requestedTime}}
+                        </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-50">
+                           Confirmation Id
+                        </div>
+                        <div class="col col-50">
+                           : {{item.confirmationId}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-50">
+                           Open/Closed
+                        </div>
+                        <div class="col col-50">
+                           : {{item.openItemCount}} / {{item.closedItemCount}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col col-50">
+                           Status
+                        </div>
+                        <div class="col col-50">
+                           : {{item.status}}
+                        </div>
+                    </div>
+                    <ion-option-button class="button-positive button-energized icon ion-compose button" ng-click="edit(item)">
+                    </ion-option-button>
+                    <ion-option-button class="button-assertive button-assertive icon ion-trash-a button" ng-click="trash(item)">
+                    </ion-option-button>
+                </ion-item>
+            </ion-list>
+        </div>
+    </ion-content>
+</ion-view>

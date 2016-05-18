@@ -1,0 +1,12 @@
+<ion-view hide-nav-bar="false"  hide-back-button="true" cache-view="false" title="FAQs">
+ <!-- <ion-view hide-nav-bar="false" title="FAQs" hide-back-button="true" cache-view="false">
+  -->   <ion-content class="has-header" has-bouncing="false" style="background-color:#F2F2F2;">
+        <div class="list">
+            <div class="item" ng-repeat="faq in faqs" style="margin-bottom:10px;">
+                <h2 class="siteColor" style="white-space:normal;" ng-bind-html="faq.question" ng-click="showFaq($index);($last)?scrollBottom():'';"></h2>
+
+                <p ng-show="showfaqindex==$index" class=" wordwrap" ng-bind-html="faq.answer"></p>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

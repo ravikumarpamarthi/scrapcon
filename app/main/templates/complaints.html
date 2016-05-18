@@ -1,0 +1,90 @@
+<ion-view hide-nav-bar="false" hide-back-button="true" cache-view="false" title="Feedback">
+    <!-- <ion-view hide-nav-bar="false" title="Complaints" hide-back-button="true" cache-view="false"> -->
+    <ion-content padding="true" class="has-header" has-bouncing="false">
+        <div class="row" ng-if="complaintMessage">
+            <div class="col col-67"><span>Confirmation Id<span class="flRight">:</span></span>
+            </div>
+            <div class="col paddingTop" style="border:1px dotted gray;"><span>{{complaintResData.complaintId}}</span>
+            </div>
+        </div>
+        <div class="row " ng-if="complaintMessage">
+            <div class="col col-center siteColor appointmentDate" ng-bind="complaintMessage"></div>
+        </div>
+    </ion-content>
+    <form name="complaintForm" novalidate ng-if="!complaintMessage">
+        <ion-content padding="true" class="has-header marginTop10" has-bouncing="false">
+            <div class="row padding ma-m-b-2">
+                <div class="col paddingZero">
+                    <div class="item item-input removeBorders">
+                        <img ngCache src="main/assets/svg/category.svg" class="ma-img-m-l" width="35px" height="30px" />
+                        <select id="categoryNameID" ng-model="complaint.categorie" ng-options="categorie as categorie.value for categorie in categories" ng-change="changeCategories(complaint.categorie)" style="background-color:white;direction:ltr;padding-left:2px;width:100%;border:none;" name="category" required>
+                            <option value="">Select Category</option>
+                        </select>
+                        <!-- <span ng-click="edit('name')">
+                     <img ng-show="!editForm.name"  src="main/assets/svg/edit-gray.svg" width="35px" height="30px" />
+                    </span> -->
+                    </div>
+                    <div class="error-container" ng-show="complaintForm.category.$error &&complaintForm.$submitted" ng-messages="complaintForm.category.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+                </div>
+            </div>
+         <!--    <div class="row padding ma-m-b-2">
+                <div class="col paddingZero">
+                    <div class="item item-input removeBorders">
+                        <img src="main/assets/svg/location1.svg" class="ma-img-m-l" width="35px" height="30px" />
+                        <input places-auto-complete placeholder="Complaint Location" id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" required name="address" />
+                       
+                    </div>
+                    <div class="error-container" ng-show="complaintForm.address.$error &&complaintForm.$submitted" ng-messages="complaintForm.address.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+                </div>
+            </div> -->
+            <!-- <div class="list " style="margin-bottom:0px;padding:9px;">
+                <label class="item item-input item-select" style="padding:10px; ">
+                    <i class="icon ion-android-person placeholder-icon"></i>
+                    <select id="categoryNameID" ng-model="complaint.categorie" ng-options="categorie as categorie.value for categorie in categories" ng-change="changeCategories(complaint.categorie)" style="direction:ltr;padding-left:2px;" name="category" required>
+                        <option value="">Select Category</option>
+                    </select>
+                </label>
+                <div class="error-container" ng-show="complaintForm.category.$error &&complaintForm.$submitted" ng-messages="complaintForm.category.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div> -->
+            <!-- <div class="list  padding" style="margin-bottom:0px;padding:9px;">
+                <label class="item item-input item-select" style="padding:10px; ">
+                    <i class="icon ion-android-person placeholder-icon"></i>
+                    <select ng-model="complaint.type" ng-options="categorytype as categorytype.value for categorytype in compaintType" name="complaintType" style="direction:ltr;padding-left:2px;" >
+                        <option value="">Select Type</option>
+                    </select>
+                </label>
+                <div class="error-container" ng-show="complaintForm.complaintType.$error &&complaintForm.$submitted" ng-messages="complaintForm.complaintType.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div> -->
+            <!-- <div class="padding">
+                <label class="item item-input custom-margin10 complaintsCustomPaddingLeft">
+                    <input places-auto-complete placeholder="Complaint Location" id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" required name="address" />
+                    <input type="text" placeholder="Complaint Location" name="complaintLocation" class="form-control" googleplace ng-autocomplete="off" options="options" details="details" ng-model="complaint.complaintLocation" required>
+                </label>
+                <div class="error-container" ng-show="complaintForm.address.$error &&complaintForm.$submitted" ng-messages="complaintForm.address.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div> -->
+            <div class="padding">
+                <label class="item item-input custom-margin10 complaintsCustomPaddingLeft" style="border-radius:10px;">
+                    <textarea type="text" name="description" placeholder="Complaint Description max 250 characters" ng-model="complaint.description" rows="10" ng-maxlength="250" required ></textarea>
+                </label>
+                <div class="error-container" ng-show="complaintForm.description.$error &&complaintForm.$submitted" ng-messages="complaintForm.description.$error">
+                    <div ng-messages-include="error-list.html"></div>
+                </div>
+            </div>
+        </ion-content>
+        <div class="tabs dashboardTabsStyle">
+            <button class="button button-stable button-clear tab-item item-text-wrap" ng-click="complaintSubmit(complaintForm)" style="font-size:16px;color:white;opacity:1;">
+                SUBMIT
+            </button>
+        </div>
+    </form>
+</ion-view>

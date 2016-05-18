@@ -1,0 +1,159 @@
+<ion-view hide-nav-bar="false" cache-view="false" hide-back-button="true" title="Sell Now">
+    <!-- <ion-view hide-nav-bar="false" title="Sell Now" cache-view="false" hide-back-button="true">
+     --><ion-content class="has-header" has-bouncing="false">
+        <div class="row " style="margin-top:-10px;padding:0px;">
+            <div class="col" style="padding:0px;margin:0px;">
+                <button class="button button-block " ng-init="pickupat=true;" ng-click="pickupat=true;dropat=false;reRednerMap();" ng-class="(pickupat)?'button-light-custom':'button-custom'" style="border:none;border-radius:0;min-height:42px;">Pickup at
+                </button>
+            </div>
+            <div class="col" style="padding:0px;margin:0px;">
+                <button class="button button-block " ng-click="pickupat=false;dropat=true;setAgents();reRednerMap();" ng-class="(dropat)?'button-light-custom':'button-custom'" style="border:none;border-radius:0;min-height:42px;">Drop at
+                </button>
+            </div>
+        </div>
+        <div ng-show="pickupat">
+            <div class="list padding marginPaddingMix">
+                <div class="row">
+                    <div class="col col-90">
+                        <label ng-show="!newlocation" class="item item-input item-select" style="padding:5px; ">
+                            <i class="icon ion-android-person placeholder-icon"></i>
+                            <select ng-model="selectedItem" ng-options="location as location.formattedAddress for location in locations" ng-change="setMap(selectedItem);" style="direction:ltr;padding-left:2px;">
+                                <option value="">Select Location</option>
+                            </select>
+                        </label>
+                        <label ng-show="newlocation" class="item item-input" style="padding:0px;padding-left:5px;">
+                            <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" />
+                        </label>
+                    </div>
+                    <div class="col col-10">
+                        <a class="balanced">
+                            <i class="icon" style="font-size:30px;" ng-class="{true: 'ion-plus-circled', false: 'ion-minus-circled'}[!newlocation]" ng-click="newlocation = !newlocation;managePlaceObject(newlocation)">
+                  </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- <ion-list ng-show="newlocation">
+                <div class="padding">
+                    <label class="item item-input" style="padding:0px;padding-left:5px;">
+                        <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" />
+                    </label>
+                </div>
+            </ion-list> -->
+            <div ng-if="!place && !data.consumerAddressId && init" class="errorDiv">Please Select Location</div>
+            <!-- content goes here -->
+            <div class="padding map-parent">
+                <!-- <div map-lazy-load="https://maps.google.com/maps/api/js"> -->
+                <ng-map ng-if="center" map-type-control=false zoom="14" center="{{center}}" style="height:250px;" zoom-control=false street-view-control=false>
+                    <marker draggable="true" position="{{center}}" on-dragend="markerDragEnd()" icon="main/assets/images/consumer.svg"></marker>
+                </ng-map>
+                <!-- </div> -->
+                <div class="map-child-target" ng-click="setCurrentLocation()"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div>
+            </div>
+            <div  class="row padding" style="height:50px;" ng-click="scrollToBottom()">
+                <div class="col-50">
+                    <label style="display:inline-block;padding-top:5px;"><i class="fa fa-calendar fa-2x"></i></label> <span ng-bind="data.preferredDate"></span>
+                </div>
+                <div class="col-50"><i class="fa fa-clock-o fa-2x"></i>
+                    <select ng-options="slot.slotId as slot.slotName disable when slot.status == 'Disabled' for slot in slots"  ng-model="data.preferredSlot" class="padding" style="background-color: #fff; border-color: #fff;">
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="row padding" style="height:50px;">
+                <div class="col-50"><i class="fa fa-money fa-2x"></i>
+                    <select class="padding" style="width: 86%; background-color: transparent; border-color: #fff;" ng-options="paymentMode.value as paymentMode.value for paymentMode in paymentModes" ng-model="data.preferredPaymentMethod">
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div ng-if="!place && !data.consumerAddressId && init" class="errorDiv">Clear above errors</div>
+            <div ng-if="errorMessage" class="errorDiv" ng-bind="errorMessage"></div>
+            <div class="padding">
+                <a ng-click="sellNow('PICKUP')" class="button button-balanced button-block" ng-disabled="otpForm.$invalid">CONFIRM</a>
+            </div>
+        </div>
+        <div ng-show="dropat" style="margin-bottom:40px;">
+            <div class="list padding marginPaddingMix">
+                <div class="row">
+                    <div class="col col-90">
+                        <label ng-show="!newlocation" class="item item-input item-select" style="padding:5px; ">
+                            <i class="icon ion-android-person placeholder-icon"></i>
+                            <select ng-model="selectedItem" ng-options="location as location.formattedAddress for location in locations" ng-change="setMap(selectedItem,'drop');reRednerMap();" style="direction:ltr;padding-left:2px;">
+                                <option value="">Select Location</option>
+                            </select>
+                        </label>
+                        <label ng-show="newlocation" class="item item-input" style="padding:0px;padding-left:5px;">
+                            <input places-auto-complete id="dropautocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="dropPlaceChanged();reRednerMap();" ng-focus="disableTap('drop')" />
+                        </label>
+                    </div>
+                    <div class="col col-10">
+                        <a class="balanced">
+                            <i class="icon" style="font-size:30px;" ng-class="{true: 'ion-plus-circled', false: 'ion-minus-circled'}[!newlocation]" ng-click="newlocation = !newlocation;managePlaceObject(newlocation,'drop')">
+                  </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--   <ion-list ng-show="newlocationDrop">
+                <div class="padding">
+                    <label class="item item-input" style="padding:0px;padding-left:5px;">
+                        <input places-auto-complete id="dropautocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="dropPlaceChanged();reRednerMap();" ng-focus="disableTap('drop')" />
+                    </label>
+                    <div ng-if="!place && !data.consumerAddressId && init" class="errorDiv">Select Location</div>
+                </div>
+            </ion-list> -->
+            <!-- content goes here -->
+            <div class="padding map-parent">
+                <!-- <div map-lazy-load="https://maps.google.com/maps/api/js"> -->
+                <ng-map ng-if="center" map-type-control=false zoom="14" center="{{center}}" map-type-id="TERRAIN" data-tap-disabled="true" style="height:250px;" zoom-control=false street-view-control=false>
+                    <marker draggable="true" position="{{center}}" on-dragend="markerDragEnd('drop')" icon="main/assets/images/consumer.svg"></marker>
+                    <marker ng-repeat="p in agents" position="{{getLatLng(p)}}" data="{{agents[$index]}}" icon="main/assets/images/agent.svg" on-click="setAgent()"></marker>
+                    <directions ng-if="getLatLng(drop.agentId)" draggable="true" panel="directions-panel" travel-mode="DRIVING" origin="{{center}}" suppress-markers=true destination="{{getLatLng(drop.agentId)}}">
+                    </directions>
+                </ng-map>
+                <!-- </div> -->
+                <div class="map-child-target" ng-click="setCurrentLocation('drop')"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div>
+            </div>
+            <div class="list padding" style="margin-bottom:0px;">
+                <label class="item item-input item-select" style="padding:5px; ">
+                    <i class="icon ion-android-person placeholder-icon"></i>
+                    <select ng-model="data.agentId" ng-options="agent.userId as agent.formattedAddress for agent in agents" style="direction:ltr;padding-left:2px;" ng-change="setDropAgent(data.agentId);scrollToBottom()">
+                        <option value="">Select Agent</option>
+                    </select>
+                </label>
+                <div style="color:red;text-align:left;" ng-if="agents.length==0">There are no agents available in your selected location</div>
+                <div style="color:red;text-align:left;" ng-if="!data.agentId && dropSubmitted">Please Select Agent</div>
+            </div>
+            <div class="row padding" style="height:50px;" ng-click="scrollToBottom()">
+                <div class="col-50">
+                    <label style="display:inline-block;padding-top:5px;"><i class="fa fa-calendar fa-2x"></i></label> <span ng-bind="data.preferredDate"></span>
+                </div>
+                <div class="col-50"><i class="fa fa-clock-o fa-2x"></i>
+                    <select ng-options="slot.slotId as slot.slotName disable when slot.status == 'Disabled' for slot in slots"  ng-model="data.preferredSlot" class="padding" style="background-color: #fff; border-color: #fff;">
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div class="row padding" style="height:50px;">
+                <div class="col"><i class="fa fa-money fa-2x"></i>
+                    <select class="padding" style="width: 86%; background-color: transparent; border-color: #fff;" ng-options="paymentMode.value as paymentMode.value for paymentMode in paymentModes" ng-model="data.preferredPaymentMethod">
+                    </select>
+                </div>
+            </div>
+            <hr>
+            <div ng-if="errorMessage" class="errorDiv" ng-bind="errorMessage"></div>
+            <div class="">
+                <button type="button" ng-click="sellNow('DROP');dropSubmitted=true;" class="button button-balanced button-block">CONFIRM</button>
+            </div>
+        </div>
+    </ion-content>
+   <!--  <div class="tabs dashboardTabsStyle">
+        <div ng-show="pickupat">
+            <button ng-click="sellNow('PICKUP')" class="button button-stable button-clear" style="font-size:16px;color:white;opacity:1;">CONFIRM</button>
+        </div>
+        <div ng-show="dropat">
+            <button type="button" ng-click="sellNow('DROP');dropSubmitted=true;" class="button button-stable button-clear" style="font-size:16px;color:white;opacity:1;">CONFIRM</button>
+        </div>
+    </div> -->
+</ion-view>

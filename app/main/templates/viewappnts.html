@@ -1,0 +1,136 @@
+<ion-view hide-nav-bar="false" cache-view="false" hide-back-button="true" title="My Appointments">
+    <!-- <ion-view hide-nav-bar="false" title="View Appointments" cache-view="false" hide-back-button="true">
+     -->
+    <div class="row tabRow" style="margin-top:34px;position:fixed;z-index:999;">
+        <div class="col tabCol">
+            <button class="button button-block tabButtonStyle" ng-init="pending=true;getPendingRequests();" ng-click="completed=false;pending=true;resetPendingParams();getPendingRequests();scrollTop();" ng-class="(pending)?'button-light-custom':'button-custom'">Pending
+            </button>
+        </div>
+        <div class="col tabCol">
+            <button class="button button-block tabButtonStyle" ng-click="completed=true;pending=false;resetCompletedParams();getCompletedRequests();scrollTop();" ng-class="(completed)?'button-light-custom':'button-custom'">Completed
+            </button>
+        </div>
+    </div>
+    <ion-content class="has-header" has-bouncing="false">
+        <div ng-show="completed" style="margin-top:50px;">
+            <div class="row paddingZero" ng-if="completedSells.length==0">
+                <span class="col siteColor appointmentDate">No Completed Sell Requests</span>
+            </div>
+            <ion-list id="pendingItemList">
+                <div ng-if="completedSells.length>0" ng-repeat="sell in completedSells" class="padding tabContent" ng-click="showAppointment(sell.confirmationId)">
+                    <ion-item class="item-text-wrap list-opt paddingZero">
+                        <div class="padding">
+                            <div class="row paddingZero">
+                                <div class="col col-90">
+                                    <span class="siteColor appointmentDate">{{sell.completedDate}} {{sell.completedTime}}</span>
+                                </div>
+                                <div class="col col-10">
+                                    <span ng-if="sell.statusCode=='REQUEST_COMPLETED'" class="ion-checkmark completed"></span>
+                                    <span ng-if="sell.statusCode=='DECLINED_BY_AGENT' || sell.statusCode=='CANCELLED_BY_CONSUMER'" class="ion-android-close declined"></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-50"><span>Confirmation Id<span class="flRight">:</span></span>
+                                </div>
+                                <div class="col paddingTop"><span>{{sell.confirmationId}}</span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-50"><span>Sell Type<span class="flRight">:</span></span>
+                                </div>
+                                <div class="col paddingTop"><span>{{sell.type}} ({{sell.subType}})</span>
+                                </div>
+                            </div>
+                            <div class="row" ng-if="sell.totalAmount">
+                                <div class="col-50"><span>Amount<span class="flRight">:</span></span>
+                                </div>
+                                <div class="col paddingTop"><span>{{sell.totalAmount}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ion-item>
+                </div>
+            </ion-list>
+            <ion-infinite-scroll ng-if="!noMoreCompletedParams" on-infinite="loadMoreCompletedRequests()" distance="1%">
+            </ion-infinite-scroll>
+        </div>
+        <div ng-show="pending" style="margin-top:50px;margin-bottom:50px;">
+            <div class="row" ng-if="pendingSells.length==0">
+                <span class="col siteColor appointmentDate">No Pending Sell Requests</span>
+            </div>
+            <ion-list id="pendingItemList">
+                <div ng-if="pendingSells.length>0" ng-repeat="sell in pendingSells" class="padding tabContent">
+                    <ion-item class="item-text-wrap list-opt">
+                        <div class="row grey-color">
+                            <div class="col-80">
+                                <div class="col-50">
+                                    <img ngCache src="main/assets/svg/time1.svg" class="list-icon"><span class="span-list-header"> {{sell.preferredDate}}</span>
+                                </div>
+                                <div class="col-50">
+                                    <img ngCache src="main/assets/svg/time1.svg" class="list-icon"><span class="span-list-header"> {{sell.preferredSlot}}</span>
+                                </div>
+                            </div>
+                            <div class="col-20 text-center app-banner-color">
+                               <span ng-if="sell.agentName" class="ion-ios-location-outline  directions" ng-click="showDirections(sell.confirmationId);$event.stopPropagation()"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-90">
+                                <span class="siteColor font-size20">
+                                <div ng-if="sell.agentName">{{sell.preferredDate}} {{sell.preferredSlot}} 
+                                </div>
+                                <div ng-if="!sell.agentName">Date and slot Allocation in progress</div>
+                               </span>
+                            </div>
+                            <div class="col col-10 text-right">
+                                <span ng-if="sell.agentName" class="ion-ios-location-outline  directions" ng-click="showDirections(sell.confirmationId);$event.stopPropagation()"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-90">
+                                <div ng-click="showAppointment(sell.confirmationId)">
+                                    <div class="row">
+                                        <div class="col-50"><span>Confirmation Id<span class="flRight">:</span></span>
+                                        </div>
+                                        <div class="col paddingTop"><span>{{sell.confirmationId}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-50"><span>Sell Type <span class="flRight">:</span></span>
+                                        </div>
+                                        <div class="col paddingTop"><span>{{sell.type}} ({{sell.subType}})</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-50"><span>Agent Name<span class="flRight">:</span></span>
+                                        </div>
+                                        <div class="col paddingTop">
+                                            <span>
+                                         {{sell.agentName || 'Allocation in progress'}}
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-50"><span>Status<span class="flRight">:</span></span>
+                                        </div>
+                                        <div class="col paddingTop"><span>{{sell.status}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col col-10 col-center">
+                                <i class='pull-right icon ion-arrow-swap'></i>
+                            </div>
+                        </div>
+                        <ion-option-button ng-class="sell.updationAllowed=='NO' ? 'disabled':''" class="button-energized custom-ion-option-50 icon ion-compose" ng-click="edit(sell)"></ion-option-button>
+                        <ion-option-button style="background-color:#fff;" class="custom-ion-option-50"></ion-option-button>
+                        <ion-option-button ng-class="sell.cancellationAllowed=='NO' ? 'disabled':''" class="custom-ion-option-50 button-assertive icon ion-trash-a" ng-click="showConfirm(sell)"></ion-option-button>
+                        <ion-option-button style="background-color:#fff;" class="custom-ion-option-50"></ion-option-button>
+                    </ion-item>
+                </div>
+            </ion-list>
+            <ion-infinite-scroll ng-if="!noMorependingParams" on-infinite="loadMorePendingRequests()" distance="1%">
+            </ion-infinite-scroll>
+        </div>
+    </ion-content>
+</ion-view>

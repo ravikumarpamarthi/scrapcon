@@ -1,0 +1,33 @@
+<ion-view hide-nav-bar="true" cache-view="false" hide-back-button="true">
+    <ion-content has-bouncing="false" padding="false" class="" style="margin-bottom:50px;">
+        <!-- <div class="left">
+            <button class="button button-positive button-clear no-animation icon ion-chevron-left" ng-click="" ng-if="!slideIndex">
+            </button>
+            <button class="button button-positive button-clear no-animation icon ion-chevron-left" ng-click="previous()" ng-if="slideIndex > 0">
+            </button>
+        </div>
+        <div class="right">
+            <button class="button button-positive button-clear no-animation icon ion-chevron-right" ng-click="next()" ng-if="!slideIndex">
+            </button>
+            <button class="button button-positive button-clear no-animation icon ion-chevron-right" ng-click="next()" ng-if="slideIndex>0">
+            </button>
+        </div> -->
+        <ion-slide-box does-continue="true" show-pager='true' slide-interval="3000" auto-play="true" on-slide-changed="slideChanged(index)">
+            <ion-slide ng-repeat="slide in slides">
+                <!-- <h3>{{slide.name}}</h3> -->
+                <img ngCache ng-src="main/assets/images/{{slide.name}}" style="width:100%; margin-top:-90px;"/>
+            </ion-slide>
+        </ion-slide-box>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle ">
+        <a class="tab-item" ui-sref="main.registration" style="border-right:1px solid white;opacity:1; overflow: initial;max-width:100% !important;font-weight:600; ">
+            NEW USER
+        </a>
+        <a class="tab-item item-text-wrap" ui-sref="main.login" style="border-left:1px solid white;opacity:1;max-width:100% !important; font-weight:600;">
+            LOGIN
+        </a>
+        <!-- <a class="tab-item" style="font-size:1.2em;color:white;max-width:100px !important;opacity:1; overflow: initial; white-space: nowrap;" on-tap="placeBid()">
+            Bid
+        </a> -->
+    </div>
+</ion-view>

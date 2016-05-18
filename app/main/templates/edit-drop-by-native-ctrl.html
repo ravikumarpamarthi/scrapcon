@@ -1,0 +1,127 @@
+<ion-view hide-nav-bar="false"  cache-view="false" hide-back-button="true">
+   <!-- <ion-view hide-nav-bar="false" title="{{(!vm.confirmation)?'Sell Now':'Sell Confirmation'}}" cache-view="false" hide-back-button="true">
+    --> <ion-content class="has-header has-footer">
+        <div>
+            <div class="list padding marginPaddingMix">
+                <div class="row">
+                    <div class="col col-90">
+                        <label ng-show="!vm.newlocation" class="item item-input item-select padding5">
+                            <i class="icon ion-android-person placeholder-icon"></i>
+                            <select ng-model="vm.selectedItem" ng-options="location as location.formattedAddress for location in locations" ng-change="addressSelect();" style="direction:ltr;padding-left:2px; width:100%">
+                                <option value="">Select Location</option>
+                            </select>
+                        </label>
+                        <label ng-show="vm.newlocation" class="item item-input googlePlaceLabel" style="">
+                            <input type="text" placeholder="Enter flat/house Number" name="name" ng-model="vm.customadd" ng-focus="disableTap('autocomplete')" ng-blur="mapSetClickable(true)">
+                            <a ng-if="vm.customadd != ''" on-touch="vm.customadd=''">
+                                <i class="icon ion-ios-close placeholder-icon"></i>
+                            </a>
+                        </label>
+                        <label ng-show="vm.newlocation" class="item item-input googlePlaceLabel">
+                            <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap()" ng-blur="mapSetClickable(true)" />
+                            <a ng-if="vm.formattedAddress != ''" on-touch="onHold()">
+                                <i class="icon ion-ios-close placeholder-icon"></i>
+                            </a>
+                        </label>
+                    </div>
+                    <div class="col col-10">
+                        <a class="balanced newSiteHeaderColor">
+                            <i class="icon" style="font-size:30px;" ng-class="{true: 'ion-plus-circled', false: 'ion-minus-circled'}[!vm.newlocation]" ng-click="vm.newlocation = !vm.newlocation;managePlaceObject(vm.newlocation)">
+                  </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="placeError" class="errorDiv">Select Location</div>
+        </div>
+        <div class="map-parent">
+            <div id="map_canvas" class="map-new-style">
+                <div class="map-child-target" ng-click="setCurrentLocation()"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div>
+            </div>
+        </div>
+        <div>
+            <div class="list " style="margin-bottom:0px;" ng-show="vm.SELLTYPE=='DROP'">
+            <div class="row paddingZero">
+                    <div class="col">
+                        <div class="row bor-clr">
+                            <div class="col col-10 paddingZero">
+                                <img ngCache class="" src="main/assets/svg/user-agent1.svg" width="35px" height="30px" />
+                            </div>
+                            <div class="col col-90">
+                                <select ng-model="data.agentId"  class="" style="width:100%; background-color: transparent; border-color: #fff;" ng-options="agent.userId as (agent.formattedAddress+'-'+agent.distance) for agent in agents" ng-change="setDropAgent(data.agentId);scrollToBottom()">
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div style="color:red;text-align:left;" ng-if="agents.length==0">There are no agents available in your selected location</div>
+                <div style="color:red;text-align:left;" ng-if="!data.agentId && dropSubmitted">Please Select Agent</div>
+               <!--  <label class="item item-input item-select" style="padding:5px; ">
+                    <i class="icon ion-android-person placeholder-icon"></i>
+                    <select ng-model="data.agentId" ng-options="agent.userId as agent.formattedAddress for agent in agents" style="direction:ltr;padding-left:2px;" ng-change="setDropAgent(data.agentId);scrollToBottom()">
+                        <option value="">Select Agent</option>
+                    </select>
+                </label>
+                <div style="color:red;text-align:left;" ng-if="agents.length==0">There are no agents available in your selected location</div>
+                <div style="color:red;text-align:left;" ng-if="!data.agentId && dropSubmitted">Please Select Agent</div> -->
+            </div>
+             <div class="row paddingZero">
+                <div class="col col-50">
+                    <div class="row bor-clr">
+                        <div class="col col-20 paddingZero">
+                            <img ngCache class="" src="main/assets/svg/time1.svg" width="35px" height="30px" />
+                        </div>
+                        <div class="col col-80">
+                            <select ng-options="slot.slotId as slot.slotName disable when slot.status == 'Disabled' for slot in slots" ng-model="data.preferredSlot" style="border:none;background-color:white;">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-50">
+                    <div class="row bor-clr">
+                        <div class="col col-20 paddingZero"><img ngCache class="" src="main/assets/svg/calender.svg" width="35px" height="30px" /></div>
+                        <div class="col col-80"><span ng-bind="data.preferredDate"></span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row paddingZero">
+                <div class="col">
+                    <div class="row bor-clr">
+                        <div class="col col-10 paddingZero">
+                            <img ngCache class="" src="main/assets/svg/wallet1.svg" width="30px" height="25px" />
+                        </div>
+                        <div class="col col-90">
+                            <select class="" style="width:100%; background-color: transparent; border-color: #fff;" ng-options="paymentMode.value as paymentMode.value for paymentMode in paymentModes" ng-model="data.preferredPaymentMethod">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row padding" style="height:50px;" ng-click="scrollToBottom()">
+                <div class="col-50"><i class="fa fa-clock-o fa-2x"></i>
+                    <select ng-options="slot.slotId as slot.slotName disable when slot.status == 'Disabled' for slot in slots" ng-model="data.preferredSlot" class="padding" style="background-color: #fff; border-color: #fff;">
+                    </select>
+                </div>
+                <div class="col-50">
+                    <label style="display:inline-block;padding-top:5px;"><i class="fa fa-calendar fa-2x"></i></label> <span ng-bind="data.preferredDate"></span>
+                </div>
+            </div>
+            <hr>
+            <div class="row padding" style="height:50px;">
+                <div class="col-50"><i class="fa fa-money fa-2x"></i>
+                    <select class="" style=" background-color: transparent; border-color: #fff;" ng-options="paymentMode.value as paymentMode.value for paymentMode in paymentModes" ng-model="data.preferredPaymentMethod">
+                    </select>
+                </div>
+            </div>
+            <hr> -->
+            <div ng-if="!place && !data.consumerAddressId && init" class="errorDiv">Clear above errors</div>
+            <div ng-if="errorMessage" class="errorDiv" ng-bind="errorMessage"></div>
+        </div>
+
+        <div ng-show="dropat" class="padding">
+            </div>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle" ng-show="!vm.confirmation" ng-click="sellNow()">
+        <button  type="button" class="button button-stable button-clear" style="font-size:16px;color:white;opacity:1;">CONFIRM</button>
+    </div>
+</ion-view>

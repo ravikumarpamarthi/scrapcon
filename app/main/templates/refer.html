@@ -1,0 +1,41 @@
+<ion-view hide-nav-bar="false"  cache-view="false" hide-back-button="true" title="Refer a Friend">
+	<!-- <ion-view hide-nav-bar="false" title="Refer a Friend" cache-view="false" hide-back-button="true">
+	 --><ion-content class="has-header" has-bouncing="false"> 
+		<form name="referFriendForm">
+            <div class="card" >
+               <div class="row" style="padding-left:0px;">
+                    	<div class="col siteColor">
+                    	  Referral Code
+                    	</div>
+                        <div class="col"><b>{{refferalCode}}</b>
+                    	</div>
+                    </div>
+                    </div>
+                 <div class="card" style="padding:5px;">   
+                    
+            	<h4 class="siteColor">INVITE FRIEND</h4>
+					<div class="row">
+						<div class="col text-center" ng-click="shareViaWhatsApp()"><i class="icon ion-social-whatsapp custom-ion-icon-size" style="font-size:50px;color:#339503;"></i></div>
+					</div>
+					<div class="row" ng-click="shareViaSMS()">	
+						<div class="col text-center"><i class="icon ion-android-textsms custom-ion-icon-size" style="font-size:50px;color:#8BD500;"></i></div>
+					</div>
+					<div class="row" ng-click="shareViaEmail()">
+						<div class="col text-center"><i class="icon ion-email custom-ion-icon-size" style="font-size:50px;color:#83B250;"></i></div>
+					</div>
+					
+            </div> 
+             <div class="card" style="padding:5px;">
+            	<h4 class="siteColor">POST</h4>
+            		<div class="row" ng-click="shareViaTwitter()">
+						<div class="col text-center"><i class="icon ion-social-twitter custom-ion-icon-size" style="font-size:50px;color:#28A9E0;"></i></div>
+					</div>
+					<di class="row" ng-click="shareViaFacebook()">	
+						<div class="col text-center" ><i class="fa fa-facebook-official custom-ion-icon-size" style="font-size:50px;color:#3C5899;"></i></div>
+						
+					</div>
+            </div> 
+               
+		</form>
+	</ion-content>
+</ion-view>	

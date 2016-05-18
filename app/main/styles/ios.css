@@ -1,0 +1,8 @@
+.platform-ios .tabRowNew{
+  margin-top:67px;
+  position:fixed;
+  z-index:999;
+}
+.platform-ios marquee.marqueeFixed{
+  margin-top:62px;
+}

@@ -1,0 +1,67 @@
+<ion-view hide-nav-bar="false" cache-view="false">
+<!-- <ion-view hide-nav-bar="false" cache-view="false" view-title="Bid Confirmation">
+    --> 
+<!-- do you want padding? -->
+    <ion-content has-bouncing="true" style="margin-top:-10px;">
+        <div class="row padding " style="margin-top:10px;">
+            <div class="col">Confirmation ID:</div>
+            <!-- <div class="col dashedBorder" >{{bidDetails.bid.confirmationId}}</div> -->
+            <div class="col" >{{bidDetails.bid.confirmationId}}</div>
+        </div>
+        <div class="row padding">
+            <div class="col">Status:</div>
+            <!-- <div class="col solidBorder" >{{bidDetails.bid.status}}</div> -->
+            <div class="col" >{{bidDetails.bid.status}}</div>
+        </div>
+        <h4 class="headingStyle" >Consumer Details:</h4>
+        <div class="row padding paddingTopBottomZero" >
+            <div class="col first-row-first-col">Name:</div>
+            <div class="col first-row-second-col">{{bidDetails.bid.consumerName}}
+            </div>
+        </div>
+        <div class="row padding paddingBottomZero" >
+            <div class="col second-row-first-col">Mobile:</div>
+            <div class="col second-row-second-col">{{bidDetails.bid.consumerMobileNo}}</div>
+        </div>
+        <div class="row padding paddingBottomZero" >
+            <div class="col second-row-first-col">Address:</div>
+            <div class="col second-row-second-col">{{bidDetails.bid.consumerAddress.formattedAddress}}</div>
+        </div>
+        <h4 class="headingStyle" >Item Details:</h4>
+        <div class="paddingBottomZero" >
+            <div class="list padding">
+                <div class="item row paddingZero custom-margin10" ng-repeat="category in bidDetails.bid.items">
+                    <div class="col col-50 col-center" style="font-size:13px;">
+                        <div style="margin-bottom:5px;">{{category.categoryName}}</div>
+                    </div>
+                    <div class="col col-50 col-center" style="text-align:right;font-size:13px;">
+                        <div class="spin">Qunatity&nbsp;&nbsp;-&nbsp;&nbsp;{{category.quantity}} Kg
+                            
+                        </div>
+                        <div class="spin">Bid Price&nbsp;&nbsp;-&nbsp;&nbsp;
+                            Rs.{{category.bidPrice}}/Kg
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h4 class="headingStyle" >Activities:</h4>
+        <div style="padding-bottom:10px;">
+            <div ng-repeat="activity in bidDetails.bid.activities">
+                <div class="row padding paddingTopBottomZero" >
+                    <div class="col first-row-first-col">Performed On:</div>
+                    <div class="col first-row-second-col">{{activity.performedOn}}</div>
+                </div>
+                <div class="row padding paddingTopBottomZero" >
+                    <div class="col first-row-first-col">Performed By:</div>
+                    <div class="col first-row-second-col">{{activity.performedBy}}</div>
+                </div>
+                <div class="row padding paddingTopBottomZero" >
+                    <div class="col second-row-first-col">Description:</div>
+                    <div class="col second-row-second-col">{{activity.description}}</div>
+                </div>
+                <hr/>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

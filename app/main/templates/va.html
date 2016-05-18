@@ -1,0 +1,165 @@
+<ion-view hide-nav-bar="false" cache-view="false" hide-back-button="true" title="My Appointments" id="newAppointmentsId">
+    <!-- <ion-view hide-nav-bar="false" title="View Appointments" cache-view="false" hide-back-button="true">
+     -->
+    <div class="row tabRow tabRowNew">
+        <div class="col tabCol">
+            <button class="button button-block tabButtonStyle" ng-init="pending=true;getPendingRequests();" ng-click="completed=false;pending=true;resetPendingParams();getPendingRequests();scrollTop();"><span ng-class="(pending)?'pendingNewStyle':'completedNewStyle'">PENDING</span>
+            </button>
+        </div>
+        <div class="col tabCol">
+            <button class="button button-block tabButtonStyle" ng-click="completed=true;pending=false;resetCompletedParams();getCompletedRequests();scrollTop();"><span ng-class="(completed)?'pendingNewStyle':'completedNewStyle'">COMPLETED</span>
+            </button>
+        </div>
+    </div>
+    <ion-content class="has-header m-t-15" has-bouncing="false">
+        <div ng-show="completed" class="m-t-50">
+            <div class="row paddingZero" ng-if="completedSells.length==0">
+                <span class="col siteColor appointmentDate">No Completed Sell Requests</span>
+            </div>
+            <ion-list>
+                <ion-item class="paddingZero paddingZeroNew" ng-repeat="sell in completedSells">
+                    <div class="row paddingZero line-height-header">
+                        <div class="col col-45 paddingZero site-bg-color-new">
+                            <img ngCache class="img-rel-t-10" src="main/assets/svg/calender.svg" width="35px" height="30px" /><span class="f-s-14-c-w">{{sell.preferredDate}}</span>
+                        </div>
+                        <div class="col col-45 paddingZero" style="background-color:#858585;">
+                            <img ngCache class="img-rel-t-10" src="main/assets/svg/time1.svg" width="35px" height="30px" /><span class="f-s-14-c-w">{{sell.preferredSlot}}</span>
+                        </div>
+                        <div class="col col-20 text-center bg-color-w-hp">
+                            <span ng-if="sell.statusCode=='REQUEST_COMPLETED'" class="ion-checkmark completed"></span>
+                            <span ng-if="sell.statusCode=='DECLINED_BY_AGENT' || sell.statusCode=='CANCELLED_BY_CONSUMER'" class="ion-android-close declined"></span>
+                        </div>
+                    </div>
+                    <div class="row text-center m-t-10-b-0" ng-click="showAppointment(sell.confirmationId)">
+                        <div class="col col-33 col-new-ui">
+                            <p><img ngCache ng-src="main/assets/svg/{{(sell.type == 'DROP')?'dropat':(sell.subType == 'RECURRING')?'recurring':'pickup'}}.svg" width="45px" height="40px" /></p>
+                            <p class="pickdrop-fs">{{(sell.type == 'DROP')?'DROP AT':(sell.subType == 'RECURRING')?'RECURRING':sell.type}}</p>
+                            <p class="con-st">CONFIRMATION</p>
+                            <p class="f-w-b-f-s-12">{{sell.confirmationId}}</p>
+                            <!-- <div class="m-b-10">
+                                <img ng-src="main/assets/svg/{{(sell.type == 'DROP')?'dropat':(sell.subType == 'RECURRING')?'recurring':'pickup'}}.svg" width="45px" height="40px" />
+                            </div>                            
+                            <span class="p-o-d"> {{(sell.type == 'DROP')?'DROP AT':(sell.subType == 'RECURRING')?'RECURRING':sell.type}}</span>
+                            <span class="f-s-10">CONFIRMATION</span>
+                            <br/>
+                            <span class="f-w-b-f-s-12">{{sell.confirmationId}}</span> -->
+                        </div>
+                        <div class="col col-33 col-new-ui">
+                            <div class="m-b-10">
+                               <img ngCache ng-src="main/assets/svg/user-agent1.svg" width="45px" height="40px" />
+                            </div>
+                            <span class="f-s-10">Sell Type</span>
+                            <br/>
+                            <span class="f-w-b-f-s-12">{{sell.type}} ({{sell.subType}})</span>
+                        </div>
+                        <div class="col col-33 p-tb-20">
+                            <div class="m-b-10">
+                                <img ngCache src="main/assets/svg/confirm1.svg" width="45px" height="40px" />
+                            </div>
+                            <span class="f-s-10">STATUS</span>
+                            <br/>
+                            <span class="f-w-b-f-s-12">{{sell.status}}</span> </div>
+                    </div>
+                </ion-item>
+            </ion-list>
+            <ion-infinite-scroll ng-if="!noMoreCompletedParams" on-infinite="loadMoreCompletedRequests()" distance="1%">
+            </ion-infinite-scroll>
+        </div>
+        <div ng-show="pending" class="m-tb-50">
+            <div class="row" ng-if="pendingSells.length==0">
+                <span class="col siteColor appointmentDate">No Pending Sell Requests</span>
+            </div>
+            <ion-list>
+                <ion-item class="paddingZero paddingZeroNew" ng-repeat="sell in pendingSells">
+                    <div class="row paddingZero" ng-class="(!sell.agentName)?'line-height-header':''">
+                        <div class="col col-45 paddingZero site-bg-color-new">
+                            <img ngCache class="img-rel-t-10" src="main/assets/svg/calender.svg" width="35px" height="30px" /><span class="f-s-14-c-w">{{sell.preferredDate}}</span>
+                        </div>
+                        <div class="col col-45 paddingZero" style="background-color:#858585;">
+                            <img ngCache class="img-rel-t-10" src="main/assets/svg/time1.svg" width="35px" height="30px" /><span class="f-s-14-c-w">{{sell.preferredSlot}}</span>
+                        </div>
+                        <div class="col col-20 text-center bg-color-w-hp" ng-if="sell.agentName" class="ion-ios-location-outline  directions" ng-click="showDirections(sell.confirmationId);$event.stopPropagation()">
+                            <img ngCache src="main/assets/svg/location.svg" width="45px" height="40px" />
+                        </div>
+                    </div>
+                    <div class="row text-center m-t-10-b-0" ng-click="showAppointment(sell.confirmationId)">
+                        <div class="col col-33 col-new-ui">
+                        <p><img ngCache ng-src="main/assets/svg/{{(sell.type == 'DROP')?'dropat':(sell.subType == 'RECURRING')?'recurring':'pickup'}}.svg" width="45px" height="40px" /></p>
+                            <p class="pickdrop-fs">{{(sell.type == 'DROP')?'DROP AT':(sell.subType == 'RECURRING')?'RECURRING':sell.type}}</p>
+                            <p class="con-st" >CONFIRMATION</p>
+                            <p class="f-w-b-f-s-12" >{{sell.confirmationId}}</p>
+                            <!-- <div class="m-b-10">
+                                <img ng-src="main/assets/svg/{{(sell.type == 'DROP')?'dropat':(sell.subType == 'RECURRING')?'recurring':'pickup'}}.svg" width="45px" height="40px" />
+                            </div>
+                            <span class="p-o-d"> {{(sell.type == 'DROP')?'DROP AT':(sell.subType == 'RECURRING')?'RECURRING':sell.type}}</span>
+                            <span class="f-s-10">CONFIRMATION</span>
+                            <br/>
+                            <span class="f-w-b-f-s-12">{{sell.confirmationId}}</span> -->
+                        </div>
+                        <div class="col col-33 col-new-ui">
+                            <div class="m-b-10">
+                            <img ngCache ng-src="main/assets/svg/user-agent1.svg" width="45px" height="40px" />
+                                
+                            </div>
+                            <span class="f-s-10">AGENT NAME</span>
+                            <br/>
+                            <span class="f-w-b-f-s-12">{{sell.agentName || 'Allocation in progress...'}}</span>
+                        </div>
+                        <div class="col col-33 p-tb-20">
+                            <div class="m-b-10">
+                                <img ngCache src="main/assets/svg/confirm1.svg" width="45px" height="40px" />
+                            </div>
+                            <span class="f-s-10">STATUS</span>
+                            <br/>
+                            <span class="f-w-b-f-s-12">{{sell.status}}</span> </div>
+                    </div>
+                    <div class="va-swipe-icon"><i class="icon ion-arrow-swap"></i></div>
+                    <ion-option-button class="button-positive custom-ion-option-50 w-35-p va-options-bg" ng-class="sell.updationAllowed=='NO' ? 'va-options-disable':''" ng-click="(sell.updationAllowed=='YES')?edit(sell):''">
+                        <div class="row " style="margin-left:-5px;">
+                            <div class="col col-center ">
+                                <div style="float:right;    position: absolute;
+    top: 23%;
+    left: 20%;">
+                                    <img ngCache src="main/assets/svg/edit-white-1.svg" width="45px" height="40px" /></div>
+                                <div style="clear:both;">
+                                    <div style="position: absolute;
+    top: 45%;
+    left: 35%;">Edit</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col col-100"><img src="main/assets/svg/edit-white-1.svg" width="45px" height="40px" /></div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-100">Edit</div>
+                        </div> -->
+                    </ion-option-button>
+                    <ion-option-button class="button-positive custom-ion-option-50 w-35-p va-options-bg" ng-class="sell.cancellationAllowed=='NO' ? 'va-options-disable':''" ng-click="(sell.cancellationAllowed=='YES')?showConfirm(sell):''">
+                        <div class="row " style="margin-left:-5px;">
+                            <div class="col col-center ">
+                                <div style="float:right;position: absolute;
+    top: 23%;
+    left: 20%;">
+                                    <img ngCache src="main/assets/svg/remove-white-1.svg" width="45px" height="40px" /></div>
+                                <div style="clear:both;">
+                                    <div style="position: absolute;
+    top: 45%;
+    left: 15%;">Cancel</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div style="position: absolute;width: 86%;text-align: center;">
+                            <img src="main/assets/svg/remove-white-1.svg" width="45px" height="40px" />
+                        </div>
+                        <div style="position: absolute;width: 86%;text-align: center;">
+                            Remove
+                        </div> -->
+                    </ion-option-button>
+                </ion-item>
+            </ion-list>
+            <ion-infinite-scroll ng-if="!noMorependingParams" on-infinite="loadMorePendingRequests()" distance="1%">
+            </ion-infinite-scroll>
+        </div>
+    </ion-content>
+</ion-view>

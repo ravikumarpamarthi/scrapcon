@@ -1,0 +1,44 @@
+<div class="modal">
+    <ion-header-bar class="bar-balanced bar-balanced-new">
+        <h1 class="title balanced">Choose Categories</h1>
+    </ion-header-bar>
+    <ion-content has-bouncing="false" style="margin-bottom:60px;">
+        <div class="padding errorDiv text-center" ng-if="userCategories.length==0">Please select atleast one category</div>
+        <div class="padding " ng-if="userCategories.length>0">Please select atleast one category</div>
+        <div class="row " ng-repeat="item in catList" >
+                    <div class="col col-20 text-left borderCat padding-horizontal">
+                        <!-- <i ng-class="item.icon" class="fa pull-right double-Icon"></i> -->
+                        <img ngCache ng-src="{{$root.getImageFileById}}/{{item.icon}}.svg" class="fa double-Icon" width="35px" height="30px" />
+                    </div>
+                    <div class="col col-67 borderCat">
+                        <span class="cat-item-text-style ng-binding">   {{item.name}}</span>
+                    </div>
+                    <div class="col col-20 checkbox-balanced borderCat">
+                        <label class="checkbox-balanced item item-checkbox borderCate">
+                            <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+                                <input type="checkbox" data-checklist-model="userCategories" data-checklist-value="item.consumerCategoryId">
+                                <i class="checkbox-icon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+        <div class="list hidden">
+            <label class="checkbox-balanced item-icon-right item item-checkbox" ng-repeat="item in catList">
+                <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+                    <input type="checkbox" data-checklist-model="userCategories" data-checklist-value="item.consumerCategoryId">
+                    <i class="checkbox-icon"></i>
+                </div>
+                <div class="item-content disable-pointer-events">
+                    <span class="ng-binding">   {{item.name}}</span>
+                    <img ngCache ng-src="{{$root.getImageFileById}}/{{item.icon}}.svg" class="fa pull-right double-Icon" width="35px" height="30px" />
+                    <!-- <i ng-class="item.icon" class="fa pull-right double-Icon"></i> -->
+                </div>
+            </label>
+        </div>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle">
+        <button ng-click="categoriesCloseModal()" class="button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+            Done
+        </button>
+    </div>
+</div>

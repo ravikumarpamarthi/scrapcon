@@ -1,0 +1,60 @@
+<ion-view hide-nav-bar="false"  hide-back-button="true" cache-view="false">
+  <!-- <ion-view hide-nav-bar="false" title="Feedback" hide-back-button="true" cache-view="false">
+   -->  <ion-content padding="true" class="has-header" has-bouncing="false">
+        <div class="padding">
+        <div class="row">
+            <div class="col col-50">Confirmation ID</div>
+            <div class="col" >: {{feedback.sellConfirmationId}}</div>
+        </div>
+        <div class="row">
+            <div class="col col-50">Agent Name</div>
+            <div class="col" >: {{feedback.agentName}}</div>
+        </div>
+         <div class="row">
+            <div class="col col-50">Date</div>
+            <div class="col" >: {{feedback.sellDate}}</div>
+        </div>
+        </div>
+
+        <form name="feedBackForm" novalidate ng-if="!feedbackSuccess" ng-submit="submit(feedBackForm)">
+            <div class="row padding">
+                <div class="col col-75"><span class="feedbackRatingSpan">Rating </span>
+                <rating name="ratingWidget" ng-model="item.rating" max="5" required></rating>
+                </div>
+                <div class="col" style="padding-top:12px;margin-left:-20px;" ng-class="(item.rating==1)?'assertive':(item.rating==2)?'energized':(item.rating==3)?'positive':(item.rating==4)?'calm':(item.rating==5)?'balanced':''">
+                {{rating.description}}
+                </div>
+            </div>
+            <div class="error-container" ng-show="feedBackForm.ratingWidget.$error &&feedBackForm.$submitted" ng-messages="feedBackForm.ratingWidget.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <label ng-if="item.rating" class="checkbox-balanced item item-checkbox" ng-repeat="ratingTag in ratingTags">
+                <div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+                    <input type="checkbox" data-checklist-model="item.feedback" data-checklist-value="ratingTag" ng-required="(item.feedback && item.feedback.length>0)?false:true" name="feedbacktype"><i class="checkbox-icon" ></i></div>
+                <div class="item-content disable-pointer-events">
+                    <span ng-bind="ratingTag"></span>
+                </div>
+            </label>
+            <div class="error-container" ng-show="feedBackForm.feedbacktype.$error &&feedBackForm.$submitted" ng-messages="feedBackForm.feedbacktype.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <label class="item item-input">
+                <textarea placeholder="Comments" ng-model="item.comments"  name="comments"></textarea>
+            </label>
+            <div class="error-container" ng-show="feedBackForm.comments.$error &&feedBackForm.$submitted" ng-messages="feedBackForm.comments.$error">
+                <div ng-messages-include="error-list.html"></div>
+            </div>
+            <div class="row padding">
+                <div class="col">
+                    <button type="submit" class="button button-block button-balanced" >Submit</button>
+                </div>
+                <div class="col">
+                    <button type="button" class="button button-block" ng-click="skip()">Skip</button>
+                </div>
+            </div>
+        </form>
+        <label class="item item-input" ng-if="feedbackSuccess">
+            {{feedbackSuccess}}
+        </label>
+    </ion-content>
+</ion-view>

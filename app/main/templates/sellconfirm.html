@@ -1,0 +1,51 @@
+<ion-view hide-nav-bar="false"  cache-view="false" hide-back-button="true">
+   <!-- <ion-view hide-nav-bar="false" title="Confirmation" cache-view="false" hide-back-button="true">
+    --> <ion-content padding="true" class="has-header" has-bouncing="false">
+        <div class="row">
+            <div class="col col-50"><strong>Confirmation ID:</strong></div>
+            <!-- <div class="col dashedBorder">{{sellDetails.confirmationId}}</div> -->
+            <div class="col">{{sellDetails.confirmationId}}</div>
+        </div>
+        <div class="row">
+            <div class="col col-50"><strong>Pickup Location:</strong></div>
+            <div class="col">{{sellDetails.consumerAddress.formattedAddress}}</div>
+        </div>
+        <div class="map-parent" >
+            <ng-map zoom="14" ng-if="origin" map-type-control=false center="{{origin}}" style="height:50%;" zoom-control=false street-view-control=false>
+                <marker draggable="false" position="{{origin}}" on-dragend="markerDragEnd()" icon="main/assets/images/consumer.svg"></marker>
+                <marker draggable="false" position="{{destination}}" on-dragend="markerDragEnd()" icon="main/assets/images/agent.svg"></marker>
+                <directions ng-if="origin" panel="directions-panel" travel-mode="DRIVING" suppress-markers=true origin="{{origin}}" destination="{{destination}}">
+                </directions>
+            </ng-map>
+            <!-- <div ng-if="sellDetails.agentName" class="map-child-target" ng-click="getDirectionByNative()"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div> -->
+        </div>
+        <div class="row" style="margin-bottom:5px;">
+            <div class="col col-50"> <strong>Pickup Date:</strong></div>
+            <div class="col">{{sellDetails.preferredDate}}</div>
+        </div>
+        <div class="row" style="margin-bottom:5px;">
+            <div class="col col-50"><strong>Pickup Time:</strong></div>
+            <div class="col">{{sellDetails.preferredSlot}}</div>
+        </div>
+        <div ng-if="sellDetails.agentName">
+            <div class="row" style="margin-bottom:5px;">
+                <div class="col col-50"><strong>Agent Name:</strong></div>
+                <div class="col">{{sellDetails.agentName}}</div>
+            </div>
+            <div class="row">
+                <div class="col col-50"><strong>Agent Mobile:</div>
+                <div class="col">{{sellDetails.agentMobileNo}}</div>
+            </div>
+        </div>
+        <!--  <div class="padding" ng-if="!sellDetails.agentName">
+            <button type="button" ng-click="goToPendingList(sellDetails.confirmationId)" class="button button-balanced button-block">View Agent Details</button>
+            </div> -->
+        
+        <!-- <div class="tabs dashboardTabsStyle" ng-if="!sellDetails.agentName">
+        <button  ng-click="goToPendingList(sellDetails.confirmationId)" type="button" class="button button-stable button-clear" style="font-size:16px;color:white;opacity:1;">View Agent Details</button> -->
+        </div>
+        <div class="tabs dashboardTabsStyle" ng-click="goToPendingList(sellDetails.confirmationId)">
+            <button type="button" class="button button-balanced button-block" style="margin:0px;">View Agent Details</button>
+        </div>
+    </ion-content>
+</ion-view>

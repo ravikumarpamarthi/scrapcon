@@ -1,0 +1,27 @@
+<ion-view hide-nav-bar="false"  hide-back-button="true" cache-view="false" title="Select Location">
+  <!-- <ion-view hide-nav-bar="false" view-title="Select Location" hide-back-button="true" cache-view="false">
+   -->  <ion-content has-bouncing="false">
+        <div ng-if="errorMessage" class="errorDiv">Please select Location</div>
+        <ion-list>
+            <div class="padding">
+                <label class="item item-input" style="white-space:normal;">
+                    <input places-auto-complete id="autocomplete" ng-model="vm.formattedAddress" type="text" on-place-changed="placeChanged()" ng-focus="disableTap('autocomplete')" />
+                </label>
+            </div>
+        </ion-list>
+        <div class="map-parent">
+                <ng-map  map-type-control=false zoom="14" center="{{center}}"  zoom-control=false street-view-control=false class="mmap">
+                    <marker draggable="true" position="{{center}}" on-dragend="markerDragEnd(event)" icon="main/assets/images/consumer.svg"></marker>
+                </ng-map>
+            <div class="map-child-target" ng-click="setCurrentLocation()"><i class="icon ion-android-locate placeholder-icon custom-target-icon"></i></div>
+        </div>
+        <div class="padding textCenter hidden">
+            <button class="button button-block button-balanced " ng-disabled="!vm.formattedAddress" ng-click="addLocation(chosenPlace,chosenPlaceObj)"><i class="icon ion-map"></i> Add Location</button>
+        </div>
+    </ion-content>
+    <div class="tabs dashboardTabsStyle">
+            <button ng-disabled="!vm.formattedAddress" ng-click="addLocation(chosenPlace,chosenPlaceObj)" class="item-icon-left button button-stable button-clear tab-item item-text-wrap" type="submit" style="font-size:16px;color:white;opacity:1;">
+                <i class="icon ion-map"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Add Location
+            </button>
+        </div>
+</ion-view>
